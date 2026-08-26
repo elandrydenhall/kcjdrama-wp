@@ -1,0 +1,12 @@
+.env
+wordpress/
+export-leaf/
+!kcjdrama/
+_theme_backups/
+_live_home.html
+*.tar.gz
+*.sql
+*.sql.gz
+.DS_Store
+Thumbs.db
+*.log
