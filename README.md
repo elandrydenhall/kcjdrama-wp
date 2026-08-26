@@ -67,7 +67,7 @@ Pack theme + media + this Grok session onto the LAN share (not WordPress core):
 
 Share leaf (uploads is the writable folder): `\\10.0.0.194\mnt\drive-a\wp-dev\kcjdrama\uploads\_export-leaf\`
 
-Local copy: `C:\Scripts\wordpress\export-leaf\`
+Local copy: `C:\Scripts\wp-dev\sites\kcjdrama\export-leaf\`
 
 On Beast, read `HANDOFF.md`. Apply into the existing WordPress:
 

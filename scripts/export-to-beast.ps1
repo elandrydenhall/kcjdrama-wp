@@ -1,6 +1,6 @@
 # Pack theme, media, session, and handoff for Beast.
 # Share parent is read-only; writable dest is uploads/_export-leaf.
-# Always also writes C:\Scripts\wordpress\export-leaf
+# Always also writes C:\Scripts\wp-dev\sites\kcjdrama\export-leaf
 
 $ErrorActionPreference = "Continue"
 $PSNativeCommandUseErrorActionPreference = $false
@@ -132,7 +132,7 @@ On the share (uploads is the only writable folder from BeeLink):
 
 ``/mnt/drive-a/wp-dev/kcjdrama/uploads/_export-leaf/``
 
-Also on BeeLink: ``C:\Scripts\wordpress\export-leaf\``
+Also on BeeLink: ``C:\Scripts\wp-dev\sites\kcjdrama\export-leaf\``
 
 - Theme: ``theme/``
 - Media: ``/mnt/drive-a/wp-dev/kcjdrama/uploads/``
