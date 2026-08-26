@@ -1,4 +1,5 @@
 # Start container-free kcjdrama WP on http://127.0.0.1:8080
+# Canonical tree: C:\Scripts\wp-dev\sites\kcjdrama
 # MySQL: Laragon mysqld. PHP: Laragon built-in server. No Docker.
 
 $ErrorActionPreference = "Stop"

@@ -11,11 +11,11 @@ from pathlib import Path
 
 import paramiko
 
-# Secrets from C:\Scripts\wordpress\.env (gitignored) or process env.
+# Secrets from site .env (gitignored) or process env.
 # Never commit or print KCJ_SSH_PASSWORD.
 import os
 
-LOCAL_WP = Path(r"C:\Scripts\wordpress")
+LOCAL_WP = Path(r"C:\Scripts\wp-dev\sites\kcjdrama")
 
 
 def load_dotenv(path: Path) -> None:
@@ -39,7 +39,7 @@ PORT = int(os.environ.get("KCJ_SSH_PORT", "65002"))
 USER = os.environ.get("KCJ_SSH_USER", "u628528567")
 PASSWORD = os.environ.get("KCJ_SSH_PASSWORD", "")
 if not PASSWORD:
-    raise SystemExit("Set KCJ_SSH_PASSWORD in C:\\Scripts\\wordpress\\.env")
+    raise SystemExit("Set KCJ_SSH_PASSWORD in C:\\Scripts\\wp-dev\\sites\\kcjdrama\\.env")
 LOCAL_THEME = LOCAL_WP / "kcjdrama"
 BACKUP_ROOT = LOCAL_WP / "_theme_backups"
 
