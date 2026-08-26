@@ -1,7 +1,7 @@
 # KCJDrama content license notes
 
 Site prose in the mega-set (tropes, syndromes, essays, hubs, bingo) is
-**original writing for kcjdrama.com / gsolo-kcjdrama**.
+**original writing for kcjdrama.com**.
 
 ## Allowed on this site
 
