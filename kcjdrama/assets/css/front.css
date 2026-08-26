@@ -2,6 +2,7 @@
  * Heroes stage untouched. Gold = profit bridge. Cyan = Mirror focus/hover only.
  */
 
+/* @critical-start */
 :root {
     /* Soft — Porcelain Romance */
     --kcj-soft-canvas-top: #f7e7ee;
@@ -61,10 +62,11 @@ a {
     color: inherit;
 }
 
-/* ---- hero stage (unchanged structure) ---- */
+/* ---- hero: desktop full plate; phone = CSS crops of the same <img> URL.
+   No <canvas>, no devicePixelRatio. Hotspots are % of their panel so iOS
+   pinch-zoom magnifies image + hit box together (WebKit 124862). ---- */
 
 .kcj-stage {
-    min-height: 100vh;
     background:
         linear-gradient(
             90deg,
@@ -81,10 +83,87 @@ a {
     line-height: 0;
 }
 
-.kcj-hero img {
+.kcj-hero--desktop {
+    display: flex;
+    justify-content: center;
+}
+
+.kcj-hero-plate {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: min(100%, calc(100vh * 16 / 9));
+    max-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+    .kcj-hero-plate {
+        width: min(100%, calc(100dvh * 16 / 9));
+        max-height: 100dvh;
+    }
+}
+
+.kcj-hero--desktop img {
     display: block;
     width: 100%;
     height: auto;
+}
+
+.kcj-hero--stack {
+    display: none;
+}
+
+.kcj-logo-link {
+    position: absolute;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--kcj-script);
+    font-size: clamp(1.45rem, 3.2vw, 2.6rem);
+    line-height: 1;
+    text-decoration: none;
+    color: transparent;
+    background: linear-gradient(90deg, #5c2a46 0%, #5c2a46 46%, #f4d6ff 54%, #f4d6ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.kcj-logo-link--stack {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
+    padding: 0.75rem 3.6rem 0.55rem 1rem;
+    font-size: 2rem;
+    background: linear-gradient(90deg, #5c2a46 0%, #c97b9a 42%, #e8c6ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.kcj-hero-panel {
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.kcj-hero-crop {
+    overflow: hidden;
+    width: 100%;
+}
+
+.kcj-hero-crop img {
+    display: block;
+    width: 200%;
+    max-width: none;
+    height: auto;
+    transform: translateX(0);
+}
+
+.kcj-hero-panel--mirror .kcj-hero-crop img {
+    transform: translateX(-50%);
 }
 
 .kcj-hotspot {
@@ -95,15 +174,45 @@ a {
     background: transparent;
 }
 
-body.kcj-debug-hotspots .kcj-hotspot {
-    background: rgba(255, 230, 80, 0.28);
+body.kcj-debug-hotspots .kcj-hotspot,
+body.kcj-debug-hotspots .kcj-logo-link {
     outline: 1px dashed #fff;
 }
 
-.kcj-hotspot:focus-visible {
+body.kcj-debug-hotspots .kcj-hotspot {
+    background: rgba(255, 230, 80, 0.28);
+}
+
+.kcj-hotspot:focus-visible,
+.kcj-logo-link:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
+}
+
+.kcj-hotspot:focus-visible {
     background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 719px) {
+    .kcj-stage {
+        min-height: 0;
+        background:
+            linear-gradient(
+                180deg,
+                #f3dce6 0%,
+                #f3dce6 50%,
+                #1a0b28 50%,
+                #1a0b28 100%
+            );
+    }
+
+    .kcj-hero--desktop {
+        display: none;
+    }
+
+    .kcj-hero--stack {
+        display: block;
+    }
 }
 
 .kcj-empty {
@@ -173,12 +282,13 @@ body.kcj-shop-rail-all .kcj-mini-mark {
     background: #fff;
 }
 
-.kcj-burger[aria-expanded="true"] {
-    background: rgba(14, 6, 24, 0.88);
-}
-
 .kcj-menu {
     display: none;
+}
+/* @critical-end */
+
+.kcj-burger[aria-expanded="true"] {
+    background: rgba(14, 6, 24, 0.88);
 }
 
 .kcj-menu:not([hidden]) {
@@ -779,9 +889,19 @@ body.kcj-shop-rail-all .kcj-mini-mark {
 
 .kcj-product-media {
     display: block;
+    position: relative;
     aspect-ratio: 1;
+    overflow: hidden;
     background:
         linear-gradient(135deg, rgba(201, 123, 154, 0.35), rgba(212, 165, 116, 0.2));
+}
+
+.kcj-product-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .kcj-product--mirror .kcj-product-media {

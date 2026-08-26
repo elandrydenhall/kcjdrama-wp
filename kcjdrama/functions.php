@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('KCJ_VERSION', '1.2.0');
+define('KCJ_VERSION', '1.2.4');
 define('KCJ_PATH', get_template_directory());
 define('KCJ_URI', get_template_directory_uri());
 
@@ -16,6 +16,7 @@ require_once KCJ_PATH . '/inc/cron.php';
 require_once KCJ_PATH . '/inc/admin.php';
 require_once KCJ_PATH . '/inc/seed.php';
 require_once KCJ_PATH . '/inc/seed-megaset.php';
+require_once KCJ_PATH . '/inc/perf.php';
 
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
@@ -51,11 +52,11 @@ function kcj_needs_woo_assets() {
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'kcj-fonts',
-        'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap',
         [],
         null
     );
-    wp_enqueue_style('kcj-front', KCJ_URI . '/assets/css/front.css', ['kcj-fonts'], KCJ_VERSION);
+    wp_enqueue_style('kcj-front', KCJ_URI . '/assets/css/front.css', [], KCJ_VERSION);
 
     if (kcj_is_brand_stage()) {
         wp_dequeue_style('wp-block-library');
@@ -208,6 +209,105 @@ function kcj_esc_hotspot_attr($value) {
     return esc_attr((string) $value);
 }
 
+function kcj_hotspot_role(array $spot) {
+    $role = sanitize_key($spot['role'] ?? 'custom');
+    return $role !== '' ? $role : 'custom';
+}
+
+/**
+ * Remap a hotspot from full-plate % into a CSS crop panel.
+ * Soft = left 50% of the plate; Mirror = right 50%. Never uses devicePixelRatio.
+ *
+ * @return array{x:float,y:float,w:float,h:float}|null
+ */
+function kcj_hotspot_box(array $spot, $panel = 'full') {
+    $x = isset($spot['x']) ? (float) $spot['x'] : 0.0;
+    $y = isset($spot['y']) ? (float) $spot['y'] : 0.0;
+    $w = isset($spot['w']) ? (float) $spot['w'] : 10.0;
+    $h = isset($spot['h']) ? (float) $spot['h'] : 6.0;
+    if ($panel !== 'soft' && $panel !== 'mirror') {
+        return ['x' => $x, 'y' => $y, 'w' => $w, 'h' => $h];
+    }
+    $mid = $x + ($w / 2.0);
+    if ($panel === 'soft') {
+        if ($mid >= 50.0) {
+            return null;
+        }
+        return ['x' => $x / 0.5, 'y' => $y, 'w' => $w / 0.5, 'h' => $h];
+    }
+    if ($mid < 50.0) {
+        return null;
+    }
+    return ['x' => ($x - 50.0) / 0.5, 'y' => $y, 'w' => $w / 0.5, 'h' => $h];
+}
+
+function kcj_hero_logo_spot(array $hotspots) {
+    foreach ($hotspots as $spot) {
+        if (!is_array($spot)) {
+            continue;
+        }
+        if (kcj_hotspot_role($spot) === 'logo') {
+            return $spot;
+        }
+    }
+    return [
+        'role'  => 'logo',
+        'x'     => 40.0,
+        'y'     => 0.0,
+        'w'     => 20.0,
+        'h'     => 7.5,
+        'href'  => '/',
+        'label' => 'kcjdrama',
+    ];
+}
+
+function kcj_render_logo_link(array $spot, $variant = 'desktop') {
+    $href  = isset($spot['href']) ? kcj_local_href($spot['href']) : '/';
+    $label = !empty($spot['label']) ? (string) $spot['label'] : 'kcjdrama';
+    $class = $variant === 'stack' ? 'kcj-logo-link kcj-logo-link--stack' : 'kcj-logo-link';
+    if ($variant === 'stack') {
+        printf(
+            '<a class="%s" href="%s">%s</a>',
+            esc_attr($class),
+            esc_url($href),
+            esc_html($label)
+        );
+        return;
+    }
+    $box = kcj_hotspot_box($spot, 'full');
+    printf(
+        '<a class="%s" href="%s" style="left:%s%%;top:%s%%;width:%s%%;height:%s%%;">%s</a>',
+        esc_attr($class),
+        esc_url($href),
+        esc_attr((string) $box['x']),
+        esc_attr((string) $box['y']),
+        esc_attr((string) $box['w']),
+        esc_attr((string) $box['h']),
+        esc_html($label)
+    );
+}
+
+function kcj_render_hotspot(array $spot, $panel = 'full') {
+    if (kcj_hotspot_role($spot) === 'logo') {
+        return;
+    }
+    $box = kcj_hotspot_box($spot, $panel);
+    if ($box === null) {
+        return;
+    }
+    $href  = isset($spot['href']) ? kcj_local_href($spot['href']) : '#';
+    $label = isset($spot['label']) ? (string) $spot['label'] : 'Open';
+    printf(
+        '<a class="kcj-hotspot" href="%s" style="left:%s%%;top:%s%%;width:%s%%;height:%s%%;" aria-label="%s"></a>',
+        esc_url($href),
+        esc_attr((string) $box['x']),
+        esc_attr((string) $box['y']),
+        esc_attr((string) $box['w']),
+        esc_attr((string) $box['h']),
+        esc_attr($label)
+    );
+}
+
 /**
  * Soft | Everything | Mirror rail from ?rail= query.
  *
@@ -240,6 +340,18 @@ function kcj_product_rail($product_id) {
         }
     }
     return 'soft';
+}
+
+/** Product tile photo: real <img loading=lazy>, not CSS background (keeps LCP clear). */
+function kcj_render_product_media(array $item) {
+    echo '<span class="kcj-product-media" aria-hidden="true">';
+    if (!empty($item['image'])) {
+        printf(
+            '<img src="%s" alt="" width="600" height="600" loading="lazy" decoding="async">',
+            esc_url($item['image'])
+        );
+    }
+    echo '</span>';
 }
 
 /**

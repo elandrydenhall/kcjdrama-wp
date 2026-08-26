@@ -55,13 +55,10 @@ get_header();
             <ul class="kcj-product-wall" data-kcj-product-list>
                 <?php foreach ($items as $item) :
                     $href = !empty($item['url']) ? $item['url'] : $shop_url;
-                    $media_style = !empty($item['image'])
-                        ? 'background-image:url(' . esc_url($item['image']) . ');background-size:cover;background-position:center;'
-                        : '';
                     ?>
                     <li class="kcj-product kcj-product--<?php echo esc_attr($item['rail']); ?>">
                         <a class="kcj-product-link" href="<?php echo esc_url($href); ?>">
-                            <span class="kcj-product-media" style="<?php echo esc_attr($media_style); ?>" aria-hidden="true"></span>
+                            <?php kcj_render_product_media($item); ?>
                             <span class="kcj-product-body">
                                 <span class="kcj-product-rail"><?php echo esc_html($item['rail_label']); ?></span>
                                 <span class="kcj-product-title"><?php echo esc_html($item['title']); ?></span>

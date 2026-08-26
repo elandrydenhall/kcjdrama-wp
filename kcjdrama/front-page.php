@@ -22,29 +22,71 @@ $featured = function_exists('kcj_featured_merch')
 get_header();
 ?>
 <main class="kcj-stage" id="kcj-stage">
-    <?php if ($hero) : ?>
-        <div class="kcj-hero">
-            <img
-                src="<?php echo esc_url($hero['image_url']); ?>"
-                alt="<?php echo esc_attr($hero['alt']); ?>"
-                width="1920"
-                height="1080"
-            >
-            <?php foreach ($hero['hotspots'] as $spot) :
-                $x = isset($spot['x']) ? (float) $spot['x'] : 0;
-                $y = isset($spot['y']) ? (float) $spot['y'] : 0;
-                $w = isset($spot['w']) ? (float) $spot['w'] : 10;
-                $h = isset($spot['h']) ? (float) $spot['h'] : 6;
-                $href = isset($spot['href']) ? kcj_local_href($spot['href']) : '#';
-                $label = isset($spot['label']) ? $spot['label'] : 'Open';
+    <?php if ($hero) :
+        $hero_src = $hero['image_url'];
+        $hero_alt = $hero['alt'];
+        $spots = is_array($hero['hotspots']) ? $hero['hotspots'] : [];
+        $logo = kcj_hero_logo_spot($spots);
+        ?>
+        <div class="kcj-hero kcj-hero--desktop">
+            <div class="kcj-hero-plate">
+                <img
+                    src="<?php echo esc_url($hero_src); ?>"
+                    alt="<?php echo esc_attr($hero_alt); ?>"
+                    width="1920"
+                    height="1080"
+                    fetchpriority="high"
+                >
+                <?php
+                kcj_render_logo_link($logo, 'desktop');
+                foreach ($spots as $spot) {
+                    if (is_array($spot)) {
+                        kcj_render_hotspot($spot, 'full');
+                    }
+                }
                 ?>
-                <a
-                    class="kcj-hotspot"
-                    href="<?php echo esc_url($href); ?>"
-                    style="left:<?php echo esc_attr($x); ?>%;top:<?php echo esc_attr($y); ?>%;width:<?php echo esc_attr($w); ?>%;height:<?php echo esc_attr($h); ?>%;"
-                    aria-label="<?php echo esc_attr($label); ?>"
-                ></a>
-            <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="kcj-hero kcj-hero--stack">
+            <?php kcj_render_logo_link($logo, 'stack'); ?>
+            <div class="kcj-hero-panel kcj-hero-panel--soft">
+                <div class="kcj-hero-crop">
+                    <img
+                        src="<?php echo esc_url($hero_src); ?>"
+                        alt=""
+                        width="1920"
+                        height="1080"
+                        decoding="async"
+                    >
+                </div>
+                <?php
+                foreach ($spots as $spot) {
+                    if (is_array($spot)) {
+                        kcj_render_hotspot($spot, 'soft');
+                    }
+                }
+                ?>
+            </div>
+            <div class="kcj-hero-panel kcj-hero-panel--mirror">
+                <div class="kcj-hero-crop">
+                    <img
+                        src="<?php echo esc_url($hero_src); ?>"
+                        alt=""
+                        width="1920"
+                        height="1080"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </div>
+                <?php
+                foreach ($spots as $spot) {
+                    if (is_array($spot)) {
+                        kcj_render_hotspot($spot, 'mirror');
+                    }
+                }
+                ?>
+            </div>
         </div>
     <?php else : ?>
         <div class="kcj-empty">
@@ -73,13 +115,10 @@ get_header();
         <ul class="kcj-product-wall">
             <?php foreach ($featured as $item) :
                 $href = !empty($item['url']) ? $item['url'] : $shop_url;
-                $media_style = !empty($item['image'])
-                    ? 'background-image:url(' . esc_url($item['image']) . ');background-size:cover;background-position:center;'
-                    : '';
                 ?>
                 <li class="kcj-product kcj-product--<?php echo esc_attr($item['rail']); ?>">
                     <a class="kcj-product-link" href="<?php echo esc_url($href); ?>">
-                        <span class="kcj-product-media" style="<?php echo esc_attr($media_style); ?>" aria-hidden="true"></span>
+                        <?php kcj_render_product_media($item); ?>
                         <span class="kcj-product-body">
                             <span class="kcj-product-rail"><?php echo esc_html($item['rail_label']); ?></span>
                             <span class="kcj-product-title"><?php echo esc_html($item['title']); ?></span>

@@ -11,18 +11,35 @@ from pathlib import Path
 
 import paramiko
 
-# Prefer env (do not commit secrets):
-#   set KCJ_SSH_HOST / KCJ_SSH_PORT / KCJ_SSH_USER / KCJ_SSH_PASSWORD
+# Secrets from C:\Scripts\wordpress\.env (gitignored) or process env.
+# Never commit or print KCJ_SSH_PASSWORD.
 import os
+
+LOCAL_WP = Path(r"C:\Scripts\wordpress")
+
+
+def load_dotenv(path: Path) -> None:
+    if not path.is_file():
+        return
+    for raw in path.read_text(encoding="utf-8-sig").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        key = key.strip()
+        val = val.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = val
+
+
+load_dotenv(LOCAL_WP / ".env")
 
 HOST = os.environ.get("KCJ_SSH_HOST", "82.29.86.108")
 PORT = int(os.environ.get("KCJ_SSH_PORT", "65002"))
 USER = os.environ.get("KCJ_SSH_USER", "u628528567")
 PASSWORD = os.environ.get("KCJ_SSH_PASSWORD", "")
 if not PASSWORD:
-    raise SystemExit("Set env KCJ_SSH_PASSWORD before running")
-
-LOCAL_WP = Path(r"C:\Scripts\wordpress")
+    raise SystemExit("Set KCJ_SSH_PASSWORD in C:\\Scripts\\wordpress\\.env")
 LOCAL_THEME = LOCAL_WP / "kcjdrama"
 BACKUP_ROOT = LOCAL_WP / "_theme_backups"
 
@@ -51,7 +68,7 @@ def run(client: paramiko.SSHClient, cmd: str, timeout: int = 120) -> tuple[str, 
     return out, err, code
 
 
-def find_theme_dir(client: paramiko.SSHClient) -> str:
+def find_theme_dir(client: paramiko.SSHClient, verbose: bool = True) -> str:
     probes = [
         "ls -la ~",
         "ls -la ~/domains 2>/dev/null || true",
@@ -59,12 +76,13 @@ def find_theme_dir(client: paramiko.SSHClient) -> str:
         "find $HOME -maxdepth 5 -type d -name public_html 2>/dev/null | head -20",
         "find $HOME -maxdepth 8 -type d -path '*/themes/kcjdrama' 2>/dev/null | head -20",
     ]
-    for cmd in probes:
-        out, err, code = run(client, cmd)
-        print(f"==== {cmd} (exit {code}) ====")
-        print(out[:3000] if out else "(empty)")
-        if err.strip():
-            print("ERR:", err[:800])
+    if verbose:
+        for cmd in probes:
+            out, err, code = run(client, cmd)
+            print(f"==== {cmd} (exit {code}) ====")
+            print(out[:3000] if out else "(empty)")
+            if err.strip():
+                print("ERR:", err[:800])
 
     out, _, _ = run(
         client,
@@ -88,6 +106,122 @@ def find_theme_dir(client: paramiko.SSHClient) -> str:
         if "kcjdrama.com" in p:
             return p
     return paths[0]
+
+
+def _tar_filter(ti: tarfile.TarInfo) -> tarfile.TarInfo | None:
+    name = ti.name.replace("\\", "/")
+    parts = name.split("/")
+    if ".git" in parts or name.endswith(".bak"):
+        return None
+    return ti
+
+
+def backup_local(stamp: str) -> Path:
+    BACKUP_ROOT.mkdir(parents=True, exist_ok=True)
+    dest = BACKUP_ROOT / f"kcjdrama-local-{stamp}"
+    if dest.exists():
+        shutil.rmtree(dest)
+    shutil.copytree(
+        LOCAL_THEME,
+        dest,
+        ignore=shutil.ignore_patterns(".git", "*.bak", "__pycache__"),
+    )
+    print("Local backup:", dest)
+    return dest
+
+
+def backup_remote(client: paramiko.SSHClient, theme_remote: str, stamp: str) -> Path:
+    BACKUP_ROOT.mkdir(parents=True, exist_ok=True)
+    remote_tar = f"/tmp/kcjdrama-live-{stamp}.tar.gz"
+    parent = str(Path(theme_remote).as_posix().rsplit("/", 1)[0])
+    out, err, code = run(
+        client,
+        f"tar -C '{parent}' -czf '{remote_tar}' kcjdrama && ls -la '{remote_tar}'",
+        timeout=180,
+    )
+    print(out.strip())
+    if code != 0:
+        print("REMOTE TAR ERR", err[:800])
+        raise SystemExit(code)
+    local_tar = BACKUP_ROOT / f"kcjdrama-live-{stamp}.tar.gz"
+    sftp = client.open_sftp()
+    sftp.get(remote_tar, str(local_tar))
+    sftp.close()
+    run(client, f"rm -f '{remote_tar}'")
+    print("Live backup:", local_tar, "bytes", local_tar.stat().st_size)
+    return local_tar
+
+
+def push_local(client: paramiko.SSHClient, theme_remote: str, stamp: str) -> None:
+    pack = LOCAL_WP / f"_push-kcjdrama-{stamp}.tar.gz"
+    with tarfile.open(pack, "w:gz") as tar:
+        tar.add(LOCAL_THEME, arcname="kcjdrama", filter=_tar_filter)
+    print("Push pack bytes:", pack.stat().st_size)
+    remote_pack = f"/tmp/kcjdrama-push-{stamp}.tar.gz"
+    sftp = client.open_sftp()
+    sftp.put(str(pack), remote_pack)
+    sftp.close()
+    parent = str(Path(theme_remote).as_posix().rsplit("/", 1)[0])
+    prev = f"{parent}/kcjdrama.prev-{stamp}"
+    cmd = (
+        f"set -e; "
+        f"tar -tzf '{remote_pack}' | head -5; "
+        f"test -f <(tar -xOf '{remote_pack}' kcjdrama/style.css) || tar -xOf '{remote_pack}' kcjdrama/style.css >/dev/null; "
+        f"mv '{theme_remote}' '{prev}'; "
+        f"tar -C '{parent}' -xzf '{remote_pack}'; "
+        f"test -f '{theme_remote}/style.css'; "
+        f"rm -rf '{prev}'; "
+        f"rm -f '{remote_pack}'; "
+        f"grep -m1 Version '{theme_remote}/style.css'"
+    )
+    # Hostinger bash may lack process substitution; keep it simple.
+    cmd = (
+        f"set -e; "
+        f"mv '{theme_remote}' '{prev}'; "
+        f"tar -C '{parent}' -xzf '{remote_pack}'; "
+        f"test -f '{theme_remote}/style.css'; "
+        f"rm -rf '{prev}'; "
+        f"rm -f '{remote_pack}'; "
+        f"grep -m1 Version '{theme_remote}/style.css'"
+    )
+    out, err, code = run(client, cmd, timeout=180)
+    print(out.strip())
+    if code != 0:
+        print("PUSH ERR", err[:1200])
+        # try restore
+        run(client, f"test -d '{theme_remote}' || mv '{prev}' '{theme_remote}'")
+        raise SystemExit(code)
+    pack.unlink(missing_ok=True)
+
+
+def push_main() -> int:
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_local(stamp)
+    print(f"Connecting {USER}@{HOST}:{PORT} …")
+    client = ssh_connect()
+    theme_remote = find_theme_dir(client, verbose=False)
+    print("Theme remote:", theme_remote)
+    out, _, _ = run(client, f"grep -m1 Version '{theme_remote}/style.css' || true")
+    print("Live version before:", out.strip())
+    backup_remote(client, theme_remote, stamp)
+    push_local(client, theme_remote, stamp)
+    client.close()
+    print("Pushed local 1.2.4 theme. Check https://kcjdrama.com/ (purge LiteSpeed if stale).")
+    return 0
+
+
+def ssh_probe() -> int:
+    """Connect and run a harmless remote command. Does not print secrets."""
+    print(f"Connecting {USER}@{HOST}:{PORT} …")
+    client = ssh_connect()
+    out, err, code = run(client, "pwd; uname -s")
+    client.close()
+    print("SSH ok" if code == 0 else "SSH command failed")
+    if out.strip():
+        print(out.strip())
+    if code != 0 and err.strip():
+        print(err.strip()[:400])
+    return code
 
 
 def main() -> int:
@@ -147,4 +281,9 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    import sys
+    if "--probe" in sys.argv:
+        raise SystemExit(ssh_probe())
+    if "--push" in sys.argv:
+        raise SystemExit(push_main())
     raise SystemExit(main())
