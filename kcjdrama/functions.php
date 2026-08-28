@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('KCJ_VERSION', '1.5.56');
+define('KCJ_VERSION', '1.5.57');
 define('KCJ_PATH', get_template_directory());
 define('KCJ_URI', get_template_directory_uri());
 
@@ -201,6 +201,13 @@ function kcj_get_current_hero() {
     $image_url = get_the_post_thumbnail_url($post, 'full');
     if (!$image_url) {
         return null;
+    }
+
+    // Bust CDN/browser cache when the upload file changes (Hostinger max-age is long).
+    $thumb_id = (int) get_post_thumbnail_id($post);
+    $file = $thumb_id ? get_attached_file($thumb_id) : '';
+    if (is_string($file) && $file !== '' && is_file($file)) {
+        $image_url = add_query_arg('v', (string) filemtime($file), $image_url);
     }
 
     $hotspots = get_post_meta($post->ID, '_kcj_hotspots', true);
