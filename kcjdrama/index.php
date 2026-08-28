@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 get_header();
 ?>
-<main class="kcj-page kcj-page--soft kcj-archive">
+<main id="kcj-main" class="kcj-page kcj-page--soft kcj-archive">
     <div class="kcj-page-inner kcj-archive-inner">
         <p class="kcj-page-kicker">Soft World</p>
         <h1><?php bloginfo('name'); ?></h1>

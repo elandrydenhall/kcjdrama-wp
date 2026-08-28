@@ -82,7 +82,7 @@ function kcj_mega_ensure_pages() {
     $home = home_url('/');
     $tropes_url = home_url('/tropes/');
     $syn_url = home_url('/syndromes/');
-    $blog = home_url('/blog/');
+    $blog = home_url('/field-notes/');
 
     kcj_mega_upsert_page(
         'start-here',
@@ -96,7 +96,7 @@ function kcj_mega_ensure_pages() {
         . kcj_mega_hub_link(home_url('/countries/japan/'), 'Japan desk', 'Workplace restraint, slow-burn silence, last-episode courage.')
         . kcj_mega_hub_link($tropes_url, 'Trope encyclopedia', 'Shared patterns with Soft craft notes and Mirror jokes.')
         . kcj_mega_hub_link($syn_url, 'Syndrome clinic', 'Name the affliction. You’re among friends.')
-        . kcj_mega_hub_link($blog, 'Field notes blog', 'Essays, starter packs, ongoing dispatches.')
+        . kcj_mega_hub_link($blog, 'Field notes', 'Essays, starter packs, ongoing dispatches.')
         . '</div>
         <h2>Soft or Mirror?</h2>
         <p><a href="' . esc_url(home_url('/soft/')) . '">Enter Soft</a> when you want craft and comfort. <a href="' . esc_url(home_url('/mirror/')) . '">Enter Mirror</a> when you want the roast and the bingo.</p>'
@@ -154,7 +154,12 @@ function kcj_mega_ensure_pages() {
     );
 
     $glossary_html = '<p class="kcj-lede">Quick literacy for global readers. Terms are explained; they are not a license to pirate novels or video.</p><dl>';
-    foreach (kcj_content_glossary() as $term => $def) {
+    foreach (kcj_content_glossary() as $row) {
+        $term = (string) ($row['term'] ?? '');
+        $def  = (string) ($row['def'] ?? '');
+        if ($term === '') {
+            continue;
+        }
         $glossary_html .= '<dt id="' . esc_attr($term) . '"><strong>' . esc_html($term) . '</strong></dt><dd>' . esc_html($def) . '</dd>';
     }
     $glossary_html .= '</dl>';
@@ -285,9 +290,17 @@ function kcj_mega_ensure_pages() {
 }
 
 function kcj_mega_ensure_blog_page() {
+    $legacy = get_page_by_path('blog');
+    if ($legacy && !get_page_by_path('field-notes')) {
+        wp_update_post([
+            'ID'         => (int) $legacy->ID,
+            'post_name'  => 'field-notes',
+            'post_title' => 'Field notes',
+        ]);
+    }
     $blog_id = kcj_mega_upsert_page(
-        'blog',
-        'Blog',
+        'field-notes',
+        'Field notes',
         '<p>Field notes land here. Use categories to filter Soft essays vs Mirror chaos.</p>'
     );
     if ($blog_id && !is_wp_error($blog_id)) {
@@ -448,6 +461,8 @@ function kcj_mega_seed_essays_and_starters() {
         kcj_mega_upsert_post($e['slug'], $e['title'], $e['body'], $e['cats'], ['essay']);
     }
 
+    // House Soft/Mirror editorial (normal WP posts). Not Soft desk fiction.
+    // Seeded here so Stories / hubs have reading paths. Public byline defaults to kcjdrama.
     $starters = [
         [
             'slug' => 'starter-enemies-energy',

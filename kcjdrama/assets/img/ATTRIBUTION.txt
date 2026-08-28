@@ -1,0 +1,10 @@
+black-rose.png / black-rose.webp
+Source: C:\Scripts\wp-dev\sites\kcjdrama\_inbox\black-rose.png
+Resized for Soft desk delete confirmation. Transparency preserved.
+
+icons/ (favicon set — RED rose)
+Source: Wikimedia Commons File:Rose_red_on_white_background.jpg
+Title: Rose red on white background
+Author: Paolo Neo
+License: Public domain (released by author)
+Used as site favicon / app icons for all devices.

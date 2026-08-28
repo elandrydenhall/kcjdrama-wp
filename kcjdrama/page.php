@@ -16,7 +16,7 @@ $mirror_slugs = [
 ];
 $tone = (in_array($slug, $mirror_slugs, true) || in_array($parent_slug, ['mirror'], true)) ? 'mirror' : 'soft';
 ?>
-<main class="kcj-page kcj-page--<?php echo esc_attr($tone); ?>">
+<main id="kcj-main" class="kcj-page kcj-page--<?php echo esc_attr($tone); ?>">
     <article class="kcj-page-inner">
         <p class="kcj-page-kicker"><?php echo $tone === 'mirror' ? 'Mirror World' : 'Soft World'; ?></p>
         <h1><?php the_title(); ?></h1>

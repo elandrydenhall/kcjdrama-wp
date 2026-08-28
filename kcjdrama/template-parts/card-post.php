@@ -2,24 +2,29 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-$cats = get_the_category();
-$mirror = false;
-foreach ($cats as $c) {
-    if (in_array($c->slug, ['syndrome', 'mirror-roast', 'listicle'], true)) {
-        $mirror = true;
-        break;
-    }
-}
+$kind = function_exists('kcj_post_kind')
+    ? kcj_post_kind()
+    : ['key' => 'note', 'label' => 'Note', 'tone' => 'soft'];
+$lede = function_exists('kcj_hub_post_lede')
+    ? kcj_hub_post_lede(get_post())
+    : wp_trim_words(get_the_excerpt() ?: wp_strip_all_tags(get_the_content()), 28);
 ?>
-<article <?php post_class('kcj-card' . ($mirror ? ' kcj-card--mirror' : '')); ?>>
-    <a class="kcj-card-link" href="<?php the_permalink(); ?>">
-        <p class="kcj-card-meta">
+<article <?php post_class('kcj-note kcj-note--' . $kind['tone']); ?>>
+    <a class="kcj-note-link" href="<?php the_permalink(); ?>">
+        <span class="kcj-note-kicker">
             <?php echo esc_html(get_the_date()); ?>
-            <?php if ($cats) : ?>
-                · <?php echo esc_html($cats[0]->name); ?>
-            <?php endif; ?>
-        </p>
-        <h2 class="kcj-card-title"><?php the_title(); ?></h2>
-        <p class="kcj-card-excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt() ?: wp_strip_all_tags(get_the_content()), 28)); ?></p>
+            ·
+            <?php echo esc_html($kind['label']); ?>
+        </span>
+        <span class="kcj-note-title"><?php the_title(); ?></span>
+        <?php
+        $byline = function_exists('kcj_post_byline_label') ? kcj_post_byline_label(get_post()) : '';
+        if ($byline !== '') :
+            ?>
+            <span class="kcj-note-byline"><?php echo esc_html($byline); ?></span>
+        <?php endif; ?>
+        <?php if ($lede !== '') : ?>
+            <span class="kcj-note-one"><?php echo esc_html($lede); ?></span>
+        <?php endif; ?>
     </a>
 </article>

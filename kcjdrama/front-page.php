@@ -14,10 +14,8 @@ if (!empty($_GET['hotspots'])) {
 $shop_url = kcj_page_url('shop');
 $tropes_url = kcj_page_url('tropes');
 $syndromes_url = kcj_page_url('syndromes');
-
-$featured = function_exists('kcj_featured_merch')
-    ? kcj_featured_merch(8)
-    : [];
+$home_url = home_url('/');
+$rail = function_exists('kcj_shop_rail') ? kcj_shop_rail() : 'all';
 
 get_header();
 ?>
@@ -98,36 +96,46 @@ get_header();
 <section class="kcj-below" aria-label="<?php esc_attr_e('Shop and editorial', 'gsolo-kcjdrama'); ?>">
     <?php /* Soft/Mirror intro + Enter links live on /soft/ and /mirror/ — hero hotspots already enter those worlds. */ ?>
 
-    <div class="kcj-below-band">
+    <div class="kcj-below-band" id="kcj-shop-split">
         <div class="kcj-below-band-head">
             <h2>Shop the split</h2>
             <p>One catalog. Two moods. Soft merch for the sincere desk — Mirror merch for the roast.</p>
         </div>
 
-        <nav class="kcj-rail-toggle" aria-label="<?php esc_attr_e('Shop rail', 'gsolo-kcjdrama'); ?>">
-            <a href="<?php echo esc_url(add_query_arg('rail', 'soft', $shop_url)); ?>" data-rail="soft">Soft</a>
-            <span class="kcj-rail-sep" aria-hidden="true">|</span>
-            <a class="is-active" href="<?php echo esc_url($shop_url); ?>" data-rail="all">Everything</a>
-            <span class="kcj-rail-sep" aria-hidden="true">|</span>
-            <a href="<?php echo esc_url(add_query_arg('rail', 'mirror', $shop_url)); ?>" data-rail="mirror">Mirror</a>
-        </nav>
+        <?php
+        if (function_exists('kcj_render_rail_toggle')) {
+            kcj_render_rail_toggle($home_url, $rail);
+        }
+        ?>
 
-        <ul class="kcj-product-wall">
-            <?php foreach ($featured as $item) :
-                $href = !empty($item['url']) ? $item['url'] : $shop_url;
+        <?php get_template_part('template-parts/home-search'); ?>
+
+        <?php
+        if (function_exists('kcj_render_merch_wall')) {
+            kcj_render_merch_wall('home');
+        }
+        ?>
+        <p class="kcj-wall-shop-link">
+            <a
+                data-kcj-shop-link
+                data-soft="<?php echo esc_url(kcj_rail_url('soft', $shop_url)); ?>"
+                data-all="<?php echo esc_url(kcj_rail_url('all', $shop_url)); ?>"
+                data-mirror="<?php echo esc_url(kcj_rail_url('mirror', $shop_url)); ?>"
+                href="<?php echo esc_url(function_exists('kcj_rail_url') ? kcj_rail_url($rail, $shop_url) : $shop_url); ?>"
+            >
+                <span data-kcj-shop-link-label>
+                <?php
+                if ($rail === 'soft') {
+                    esc_html_e('See all Soft in Shop', 'gsolo-kcjdrama');
+                } elseif ($rail === 'mirror') {
+                    esc_html_e('See all Mirror in Shop', 'gsolo-kcjdrama');
+                } else {
+                    esc_html_e('Open full Shop', 'gsolo-kcjdrama');
+                }
                 ?>
-                <li class="kcj-product kcj-product--<?php echo esc_attr($item['rail']); ?>">
-                    <a class="kcj-product-link" href="<?php echo esc_url($href); ?>">
-                        <?php kcj_render_product_media($item); ?>
-                        <span class="kcj-product-body">
-                            <span class="kcj-product-rail"><?php echo esc_html($item['rail_label']); ?></span>
-                            <span class="kcj-product-title"><?php echo esc_html($item['title']); ?></span>
-                            <span class="kcj-product-meta"><?php echo esc_html($item['meta']); ?></span>
-                        </span>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+                </span>
+            </a>
+        </p>
     </div>
 
     <div class="kcj-below-band">

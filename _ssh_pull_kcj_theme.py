@@ -8,6 +8,7 @@ import shutil
 import tarfile
 from datetime import datetime
 from pathlib import Path
+import subprocess
 
 import paramiko
 
@@ -206,7 +207,120 @@ def push_main() -> int:
     backup_remote(client, theme_remote, stamp)
     push_local(client, theme_remote, stamp)
     client.close()
-    print("Pushed local 1.2.4 theme. Check https://kcjdrama.com/ (purge LiteSpeed if stale).")
+    print("Pushed local theme. Check https://kcjdrama.com/ (purge LiteSpeed if stale).")
+    return 0
+
+
+def wp_root_from_theme(theme_remote: str) -> str:
+    parts = theme_remote.replace("\\", "/").rstrip("/").split("/")
+    # .../public_html/wp-content/themes/kcjdrama
+    if len(parts) < 4:
+        raise SystemExit(f"Unexpected theme path: {theme_remote}")
+    return "/".join(parts[:-3])
+
+
+def export_local_pack() -> Path:
+    pack = LOCAL_WP / "scripts" / "_hostinger-pack.json"
+    exporter = LOCAL_WP / "scripts" / "export-hostinger-pack.php"
+    wp = LOCAL_WP / "scripts" / "wp.ps1"
+    if not exporter.is_file() or not wp.is_file():
+        raise SystemExit("Missing export-hostinger-pack.php or wp.ps1")
+    cmd = [
+        "powershell",
+        "-NoProfile",
+        "-File",
+        str(wp),
+        "eval-file",
+        str(exporter),
+    ]
+    print("Exporting local pages/tags/cats (no products) …")
+    proc = subprocess.run(cmd, cwd=str(LOCAL_WP), capture_output=True, text=True)
+    if proc.stdout:
+        print(proc.stdout.strip()[:1500])
+    if proc.returncode != 0:
+        print((proc.stderr or "")[:1500])
+        raise SystemExit(f"export failed ({proc.returncode})")
+    if not pack.is_file():
+        raise SystemExit("Pack JSON was not written")
+    print("Pack bytes:", pack.stat().st_size)
+    return pack
+
+
+def remote_php(client: paramiko.SSHClient) -> str:
+    out, _, _ = run(
+        client,
+        "command -v php || ls /opt/alt/php83/usr/bin/php /opt/alt/php82/usr/bin/php /usr/bin/php 2>/dev/null | head -1",
+    )
+    php = (out or "").strip().splitlines()[0] if out.strip() else ""
+    if not php:
+        raise SystemExit("No php CLI on Hostinger")
+    return php
+
+
+def apply_remote_content(
+    client: paramiko.SSHClient,
+    wp_root: str,
+    stamp: str,
+    pack: Path,
+) -> None:
+    apply_src = LOCAL_WP / "scripts" / "apply-hostinger-content.php"
+    remote_dir = f"/tmp/kcj-ship-{stamp}"
+    run(client, f"mkdir -p '{remote_dir}'")
+    sftp = client.open_sftp()
+    sftp.put(str(pack), f"{remote_dir}/pack.json")
+    sftp.put(str(apply_src), f"{remote_dir}/apply.php")
+    sftp.close()
+    php = remote_php(client)
+    print("Remote php:", php)
+    cmd = f"{php} '{remote_dir}/apply.php' '{wp_root}' '{remote_dir}/pack.json'"
+    out, err, code = run(client, cmd, timeout=180)
+    print(out.strip()[-2500:] if out.strip() else "(no apply stdout)")
+    if code != 0:
+        print("APPLY ERR", (err or "")[:1200])
+        run(client, f"rm -rf '{remote_dir}'")
+        raise SystemExit(code)
+    run(client, f"rm -rf '{remote_dir}'")
+    # LiteSpeed / generic caches — do not touch uploads or products.
+    run(
+        client,
+        f"rm -rf '{wp_root}/wp-content/cache' '{wp_root}/wp-content/litespeed' 2>/dev/null || true",
+    )
+
+
+def apply_only_main() -> int:
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    pack = export_local_pack()
+    print(f"Connecting {USER}@{HOST}:{PORT} …")
+    client = ssh_connect()
+    theme_remote = find_theme_dir(client, verbose=False)
+    wp_root = wp_root_from_theme(theme_remote)
+    apply_remote_content(client, wp_root, stamp, pack)
+    client.close()
+    print("Re-applied pages/tags/cats. Products untouched.")
+    return 0
+
+
+def ship_main() -> int:
+    """Theme + pages + merch tags/cats. Never ships or rewrites products."""
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    pack = export_local_pack()
+    backup_local(stamp)
+    print(f"Connecting {USER}@{HOST}:{PORT} …")
+    client = ssh_connect()
+    theme_remote = find_theme_dir(client, verbose=False)
+    wp_root = wp_root_from_theme(theme_remote)
+    print("Theme remote:", theme_remote)
+    print("WP root:", wp_root)
+    out, _, _ = run(client, f"grep -m1 Version '{theme_remote}/style.css' || true")
+    print("Live version before:", out.strip())
+    backup_remote(client, theme_remote, stamp)
+    push_local(client, theme_remote, stamp)
+    apply_remote_content(client, wp_root, stamp, pack)
+    out, _, _ = run(client, f"grep -m1 Version '{theme_remote}/style.css' || true")
+    print("Live version after:", out.strip())
+    client.close()
+    print("Shipped theme + pages + tags + categories. Products left on Hostinger.")
+    print("Check https://kcjdrama.com/ and purge LiteSpeed in hPanel if the home CSS looks old.")
     return 0
 
 
@@ -286,4 +400,8 @@ if __name__ == "__main__":
         raise SystemExit(ssh_probe())
     if "--push" in sys.argv:
         raise SystemExit(push_main())
+    if "--ship" in sys.argv:
+        raise SystemExit(ship_main())
+    if "--apply-only" in sys.argv:
+        raise SystemExit(apply_only_main())
     raise SystemExit(main())

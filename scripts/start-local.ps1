@@ -1,16 +1,21 @@
 # Start container-free kcjdrama WP on http://127.0.0.1:8080
 # Canonical tree: C:\Scripts\wp-dev\sites\kcjdrama
-# MySQL: Laragon mysqld. PHP: Laragon built-in server. No Docker.
+# MySQL: shared Laragon mysqld (port 3306) — started detached so it survives this shell.
+# PHP: Laragon built-in server. No Docker.
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 $Php = "C:\laragon\bin\php\php-8.3.33-Win32-vs16-x64\php.exe"
-$Mysqld = "C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld.exe"
-$MyIni = "C:\laragon\data\mysql-kcj.ini"
+$EnsureMysql = "C:\Scripts\wp-dev\scripts\ensure-mysql.ps1"
 
-if (-not (Get-Process mysqld -ErrorAction SilentlyContinue)) {
-    Start-Process -FilePath $Mysqld -ArgumentList "--defaults-file=$MyIni" -WindowStyle Hidden
-    Start-Sleep -Seconds 3
+if (-not (Test-Path $Php)) {
+    Write-Error "PHP not found: $Php"
+    exit 1
+}
+
+& $EnsureMysql
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
 }
 
 $listening = Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue
