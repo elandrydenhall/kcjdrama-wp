@@ -62,14 +62,51 @@ if ($is_home) {
 </header>
 <script>
 (function () {
+    var chrome = document.querySelector('.kcj-chrome');
     var btn = document.querySelector('.kcj-burger');
     var panel = document.getElementById('kcj-menu');
-    if (!btn || !panel) return;
-    btn.addEventListener('click', function () {
-        var open = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-        btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-        panel.hidden = open;
-    });
+    if (btn && panel) {
+        btn.addEventListener('click', function () {
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+            btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+            panel.hidden = open;
+            if (!open && chrome) {
+                chrome.classList.remove('kcj-chrome--away');
+            }
+        });
+    }
+    if (!chrome) return;
+
+    var lastY = window.scrollY || 0;
+    var ticking = false;
+    var hideAfter = 12;
+
+    function menuOpen() {
+        return btn && btn.getAttribute('aria-expanded') === 'true';
+    }
+
+    function onScroll() {
+        ticking = false;
+        var y = window.scrollY || 0;
+        if (menuOpen() || y <= 8) {
+            chrome.classList.remove('kcj-chrome--away');
+            lastY = y;
+            return;
+        }
+        if (y < lastY) {
+            chrome.classList.remove('kcj-chrome--away');
+        } else if (y > lastY + hideAfter) {
+            chrome.classList.add('kcj-chrome--away');
+        }
+        lastY = y;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            ticking = true;
+            window.requestAnimationFrame(onScroll);
+        }
+    }, { passive: true });
 })();
 </script>

@@ -279,7 +279,7 @@ body.kcj-debug-hotspots .kcj-hotspot {
 /* ---- chrome: hamburger only ---- */
 
 .kcj-chrome {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -289,6 +289,21 @@ body.kcj-debug-hotspots .kcj-hotspot {
     justify-content: flex-end;
     padding: 0.85rem 1rem;
     pointer-events: none;
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.16s ease, opacity 0.16s ease;
+}
+
+.kcj-chrome.kcj-chrome--away {
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kcj-chrome {
+        transition: none;
+    }
 }
 
 .kcj-chrome--page {
