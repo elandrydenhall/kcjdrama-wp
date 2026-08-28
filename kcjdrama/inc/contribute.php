@@ -189,6 +189,14 @@ function kcj_login_keep_actions() {
     return ['logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'postpass', 'confirmaction', 'checkemail'];
 }
 
+function kcj_forgot_password_url($redirect = '') {
+    $args = ['action' => 'lostpassword'];
+    if ($redirect !== '') {
+        $args['redirect_to'] = $redirect;
+    }
+    return add_query_arg($args, site_url('wp-login.php', 'login'));
+}
+
 function kcj_login_door_url($code = '', $redirect = '') {
     $url = kcj_page_url('sign-in');
     if ($code !== '') {
@@ -254,6 +262,86 @@ add_filter('login_headertext', function () {
 });
 
 add_filter('login_display_language_dropdown', '__return_false');
+
+add_filter('lostpassword_url', function ($url, $redirect) {
+    return kcj_forgot_password_url(is_string($redirect) ? $redirect : '');
+}, 10, 2);
+
+/**
+ * Forgot-password link under every front-end wp_login_form (Sign in page + Soft desk).
+ */
+add_filter('login_form_bottom', function ($content, $args = []) {
+    if (is_admin()) {
+        return $content;
+    }
+    global $pagenow;
+    if (isset($pagenow) && $pagenow === 'wp-login.php') {
+        return $content;
+    }
+    $redirect = '';
+    if (is_array($args) && !empty($args['redirect'])) {
+        $redirect = (string) $args['redirect'];
+    }
+    $url = esc_url(kcj_forgot_password_url($redirect));
+    $label = esc_html__('Forgot username or password?', 'kcjdrama');
+    return $content . '<p class="kcj-forgot-link"><a href="' . $url . '">' . $label . '</a></p>';
+}, 10, 2);
+
+add_filter('login_message', function ($message) {
+    $action = isset($_REQUEST['action']) ? (string) wp_unslash($_REQUEST['action']) : 'login';
+    if ($action === 'lostpassword' || $action === 'retrievepassword') {
+        return '<p class="message kcj-login-soft-msg">' . esc_html__(
+            'Enter the email or username on your key. We’ll send a reset link if the house knows that address.',
+            'kcjdrama'
+        ) . '</p>';
+    }
+    if ($action === 'resetpass' || $action === 'rp') {
+        return '<p class="message kcj-login-soft-msg">' . esc_html__(
+            'Choose a new password for this key. Twice, so it sticks.',
+            'kcjdrama'
+        ) . '</p>';
+    }
+    if ($action === 'checkemail' && isset($_GET['checkemail']) && $_GET['checkemail'] === 'confirm') {
+        return '<p class="message kcj-login-soft-msg">' . esc_html__(
+            'If that key is in this house, a reset letter is on its way. Check your email.',
+            'kcjdrama'
+        ) . '</p>';
+    }
+    return $message;
+});
+
+add_filter('gettext', function ($translation, $text, $domain) {
+    if ($domain !== 'default') {
+        return $translation;
+    }
+    $on_login = function_exists('is_login') ? is_login() : false;
+    if (!$on_login) {
+        global $pagenow;
+        $on_login = isset($pagenow) && $pagenow === 'wp-login.php';
+    }
+    if (!$on_login) {
+        return $translation;
+    }
+    $map = [
+        'Username or Email Address' => 'Email or username',
+        'Get New Password'          => 'Send reset link',
+        'Lost your password?'       => 'Forgot username or password?',
+        'Remember Me'               => 'Keep this key',
+        'Log In'                    => 'Open the door',
+        'Register'                  => 'Make a login',
+        'Reset Password'            => 'Save new password',
+        'Confirm new password'      => 'New password again',
+    ];
+    return $map[$text] ?? $translation;
+}, 10, 3);
+
+add_filter('login_site_html_link', function () {
+    return sprintf(
+        '<a href="%s">%s</a>',
+        esc_url(kcj_page_url('sign-in')),
+        esc_html__('← Soft door', 'kcjdrama')
+    );
+});
 
 add_action('login_enqueue_scripts', function () {
     wp_enqueue_style(
@@ -352,11 +440,42 @@ add_action('login_enqueue_scripts', function () {
         color: #c97b9a;
         text-decoration: none;
     }
+    .login #nav a:hover,
+    .login #backtoblog a:hover {
+        color: #3d2432;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
     .login #backtoblog a {
         font-size: 0.72rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         font-weight: 700;
+    }
+    .login form .input:focus,
+    .login input[type="text"]:focus,
+    .login input[type="password"]:focus {
+        border-color: #d4a574;
+        box-shadow: 0 0 0 1px #d4a574;
+        outline: none;
+    }
+    .login .description {
+        color: #7a5a68;
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+    .login .indicator-hint,
+    .login .pw-weak {
+        color: #7a5a68;
+    }
+    .login #pass-strength-result {
+        background: #fff6fa;
+        border: 1px solid rgba(61, 36, 50, 0.12);
+        border-radius: 8px;
+        color: #3d2432;
+    }
+    .login .kcj-login-soft-msg {
+        border-left-color: #d4a574 !important;
     }
     ';
     wp_add_inline_style('kcj-login-fonts', $css);

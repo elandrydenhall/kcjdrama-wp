@@ -2104,6 +2104,26 @@ body:has(.kcj-shop--mirror) .kcj-menu a:hover {
     box-shadow: 0 0 0 1px var(--kcj-soft-champagne);
 }
 
+.kcj-forgot-link {
+    margin: 0.85rem 0 0;
+    font-size: 0.88rem;
+}
+
+.kcj-forgot-link a {
+    color: var(--kcj-soft-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.kcj-forgot-link a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.kcj-desk-card--login .kcj-forgot-link {
+    margin-top: 0.75rem;
+}
+
 .kcj-signin .kcj-teaser {
     text-decoration: none;
     color: inherit;
