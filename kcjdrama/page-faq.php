@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQ — Check with Grok Pass OR Fail. Template hierarchy: page-faq.php for /faq/
+ * FAQ — Soft desk Pass OR Fail. Template hierarchy: page-faq.php for /faq/
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -19,7 +19,7 @@ get_header();
             <p class="kcj-page-kicker"><?php esc_html_e('Soft World · The desk', 'kcjdrama'); ?></p>
             <h1><?php the_title(); ?></h1>
             <p class="kcj-policy-lede">
-                <?php esc_html_e('How a Soft short goes from a hold to a pass. Check with Grok uses this bar before a story can publish itself.', 'kcjdrama'); ?>
+                <?php esc_html_e('How a Soft short goes from a hold to a pass. AI Review My Draft & Publish uses this bar before a story can publish itself.', 'kcjdrama'); ?>
             </p>
             <div class="kcj-brand-actions">
                 <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($stories); ?>#kcj-desk"><?php esc_html_e('Write for the desk', 'kcjdrama'); ?></a>

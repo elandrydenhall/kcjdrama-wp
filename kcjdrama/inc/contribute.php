@@ -1241,13 +1241,11 @@ function kcj_render_stories_desk() {
                             <?php
                             wp_editor($edit ? $edit->post_content : '', 'kcj_body', [
                                 'textarea_name'    => 'kcj_body',
-                                'textarea_rows'    => 20,
+                                'textarea_rows'    => 5,
                                 'media_buttons'    => false,
                                 'drag_drop_upload' => false,
                                 'teeny'            => false,
-                                'quicktags'        => [
-                                    'buttons' => 'strong,em,ul,ol,li,blockquote,link,close',
-                                ],
+                                'quicktags'        => false,
                                 'tinymce'          => [
                                     'toolbar1'             => 'formatselect,bold,italic,underline,blockquote,bullist,numlist,link,unlink,undo,redo,removeformat',
                                     'toolbar2'             => '',
@@ -1255,7 +1253,10 @@ function kcj_render_stories_desk() {
                                     'wordpress_adv_hidden' => true,
                                     'branding'             => false,
                                     'resize'               => true,
-                                    'wp_autoresize_on'     => true,
+                                    'wp_autoresize_on'     => false,
+                                    'height'               => 120,
+                                    'content_css'          => false,
+                                    'content_style'        => 'html,body{height:auto!important;min-height:0!important;}body{margin:0;padding:0.6rem 0.75rem;font-size:1rem;line-height:1.55;box-sizing:border-box;}',
                                 ],
                             ]);
                             ?>
@@ -1264,9 +1265,18 @@ function kcj_render_stories_desk() {
                             <button type="button" class="kcj-btn kcj-btn--soft" id="kcj-ai-check"
                                 data-rest="<?php echo esc_url(rest_url('kcj/v1/story-check')); ?>"
                                 data-nonce="<?php echo esc_attr(wp_create_nonce('wp_rest')); ?>"
-                            ><?php esc_html_e('Check with Grok', 'kcjdrama'); ?></button>
-                            <button type="submit" class="kcj-btn kcj-btn--soft"><?php esc_html_e('Send to the desk', 'kcjdrama'); ?></button>
-                            <a class="kcj-brand-cross" href="#kcj-desk-faq"><?php esc_html_e('Pass OR Fail', 'kcjdrama'); ?></a>
+                                title="<?php echo esc_attr__('Runs an AI Pass OR Fail on your draft. A pass offers Publish now; a hold explains what to fix.', 'kcjdrama'); ?>"
+                                aria-describedby="kcj-ai-check-tip"
+                            ><?php esc_html_e('AI Review My Draft & Publish', 'kcjdrama'); ?></button>
+                            <button type="submit" class="kcj-btn kcj-btn--soft"
+                                title="<?php echo esc_attr__('Sends the short to a human editor. It stays pending until someone publishes — Grok does not auto-publish this path.', 'kcjdrama'); ?>"
+                                aria-describedby="kcj-human-submit-tip"
+                            ><?php esc_html_e('Human Review & Publish', 'kcjdrama'); ?></button>
+                            <a class="kcj-brand-cross" href="#kcj-desk-faq" title="<?php echo esc_attr__('What passes and what fails before a Soft short can go live.', 'kcjdrama'); ?>"><?php esc_html_e('Pass OR Fail', 'kcjdrama'); ?></a>
+                            <p class="kcj-desk-ai-tips" id="kcj-desk-ai-tips">
+                                <span id="kcj-ai-check-tip"><?php esc_html_e('AI Review: get a Pass or Hold first. Pass can publish right away.', 'kcjdrama'); ?></span>
+                                <span id="kcj-human-submit-tip"><?php esc_html_e('Human Review: an editor reads it before it goes live.', 'kcjdrama'); ?></span>
+                            </p>
                         </div>
                         <?php
                         $last = ($edit && function_exists('kcj_ai_last_notes_for_user')) ? kcj_ai_last_notes_for_user() : null;
@@ -1424,7 +1434,7 @@ function kcj_render_stories_desk() {
                       function onDirty() {
                         if (ignoreDirty || !choice.classList.contains("is-offer")) return;
                         if (readDraft().sig === passedSig) return;
-                        showResult("", "The story changed. Check with Grok again.", false);
+                        showResult("", "The story changed. Run AI Review again.", false);
                       }
                       btn.addEventListener("click", function () {
                         if (intent) intent.value = "";
@@ -1447,7 +1457,7 @@ function kcj_render_stories_desk() {
                             showResult("is-pass", "Grok passed.", true);
                             return;
                           }
-                          var hold = "Held. Edit and check again.";
+                          var hold = "Held. Edit, then run AI Review again.";
                           if (reasons.length) hold = reasons.join(" ");
                           else if (msg) hold = msg;
                           else if (!pack.r.ok) hold = "Check failed (" + pack.r.status + "). Sign in again, then retry.";
@@ -1459,7 +1469,7 @@ function kcj_render_stories_desk() {
                       if (publish) {
                         publish.addEventListener("click", function () {
                           if (readDraft().sig !== passedSig) {
-                            showResult("", "The story changed. Check with Grok again.", false);
+                            showResult("", "The story changed. Run AI Review again.", false);
                             return;
                           }
                           if (intent) intent.value = "publish";
@@ -1472,7 +1482,7 @@ function kcj_render_stories_desk() {
                       }
                       if (keep) {
                         keep.addEventListener("click", function () {
-                          showResult("", "Keep working. Edit, then check again.", false);
+                          showResult("", "Keep working. Edit, then run AI Review again.", false);
                           if (window.tinyMCE && window.tinyMCE.get("kcj_body")) {
                             window.tinyMCE.get("kcj_body").focus();
                           } else {
@@ -1495,6 +1505,24 @@ function kcj_render_stories_desk() {
                         bylineIn.addEventListener("input", syncByline);
                         syncByline();
                       }
+                      function clampMobileEditor(ed) {
+                        if (!ed || ed.id !== "kcj_body") return;
+                        if (!window.matchMedia || !window.matchMedia("(max-width: 699px)").matches) return;
+                        try {
+                          ed.theme && ed.theme.resizeTo && ed.theme.resizeTo(null, 120);
+                        } catch (err) {}
+                        var ifr = document.getElementById("kcj_body_ifr");
+                        if (ifr) {
+                          ifr.style.height = "7.5rem";
+                          ifr.style.minHeight = "7.5rem";
+                          ifr.style.maxHeight = "12rem";
+                        }
+                        var body = ed.getBody && ed.getBody();
+                        if (body) {
+                          body.style.minHeight = "0";
+                          body.style.height = "auto";
+                        }
+                      }
                       function bindEditor(ed) {
                         if (!ed || ed.id !== "kcj_body") return;
                         ed.on("change", onDirty);
@@ -1502,6 +1530,8 @@ function kcj_render_stories_desk() {
                         ed.on("undo", onDirty);
                         ed.on("redo", onDirty);
                         ed.on("paste", onDirty);
+                        ed.on("init", function () { clampMobileEditor(ed); });
+                        clampMobileEditor(ed);
                       }
                       if (window.tinyMCE) {
                         bindEditor(window.tinyMCE.get("kcj_body"));
@@ -1509,6 +1539,11 @@ function kcj_render_stories_desk() {
                           window.tinyMCE.on("AddEditor", function (e) { bindEditor(e.editor); });
                         }
                       }
+                      window.addEventListener("orientationchange", function () {
+                        if (window.tinyMCE && window.tinyMCE.get("kcj_body")) {
+                          clampMobileEditor(window.tinyMCE.get("kcj_body"));
+                        }
+                      });
                     })();
                     </script>
                 </div>
@@ -1617,7 +1652,7 @@ function kcj_render_desk_faq($heading_tag = 'h3') {
     ?>
     <div class="kcj-desk-faq" id="kcj-desk-faq">
         <<?php echo $heading_tag; ?>><?php esc_html_e('Pass OR Fail', 'kcjdrama'); ?></<?php echo $heading_tag; ?>>
-        <p class="kcj-faq-lede"><?php esc_html_e('Check with Grok uses this bar. The Result field names a pass or a hold. A pass offers Publish now or Keep working. Publish now opens the live short. Keep working stays in the editor. Send to the desk waits for a human.', 'kcjdrama'); ?></p>
+        <p class="kcj-faq-lede"><?php esc_html_e('AI Review My Draft & Publish uses this bar. The Result field names a pass or a hold. A pass offers Publish now or Keep working. Publish now opens the live short. Keep working stays in the editor. Human Review & Publish waits for an editor.', 'kcjdrama'); ?></p>
 
         <section class="kcj-policy-grid kcj-faq-pair" aria-label="<?php esc_attr_e('The bar', 'kcjdrama'); ?>">
             <article class="kcj-policy-card">

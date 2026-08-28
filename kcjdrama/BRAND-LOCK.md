@@ -5,7 +5,7 @@ This file is the freeze. Artists (human or agent) do not “improve” the look 
 ## Frozen
 
 - **Hero plate:** `assets/seed/home-01.webp` (healed Soft|Mirror 1920×1080). CSS-crop stack on mobile. No canvas. No Imagine heal. No replacement collage.
-- **House mark:** CSS text `kcjdrama` (Great Vibes) over the seam. Not `topbar_logo`. Not abstract PNGs. Not a newly generated “KCJ Drama” bitmap unless the operator pastes one.
+- **House mark:** CSS text `kcjdrama` (Great Vibes) over the seam by default. Not `topbar_logo`. Not abstract PNGs. Per-hero float wordmarks from the ImageWork heal pipeline are allowed when the operator reviews them (`_hero-trove/HERO-EDIT-NOTES.md`, skill `kcj-hero-edit`).
 - **Soft palette:** porcelain tokens in `front.css` `:root` (`--kcj-soft-*`).
 - **Mirror palette:** violet-circuit tokens (`--kcj-mirror-*`).
 - **Gold:** `--kcj-gold` is the shop/profit bridge only. Not a third world.
