@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('KCJ_VERSION', '1.5.81');
+define('KCJ_VERSION', '1.5.82');
 define('KCJ_PATH', get_template_directory());
 define('KCJ_URI', get_template_directory_uri());
 
