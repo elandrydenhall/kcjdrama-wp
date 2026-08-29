@@ -323,31 +323,27 @@ body.kcj-debug-hotspots .kcj-hotspot {
     position: relative;
 }
 
-.kcj-account-link {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
+.kcj-account-link,
+.kcj-chrome--page .kcj-account-link,
+.kcj-chrome--home .kcj-account-link,
+body:has(.kcj-page--mirror) .kcj-account-link,
+body:has(.kcj-page--soft) .kcj-account-link,
+body.kcj-shop-rail-mirror .kcj-account-link,
+body.kcj-shop-rail-soft .kcj-account-link,
+body.kcj-shop-rail-all .kcj-account-link,
+body.kcj-pdp-mirror .kcj-account-link,
+body.kcj-pdp-soft .kcj-account-link {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #fff;
+    color: #000;
     padding: 0.35rem 0.2rem;
     white-space: nowrap;
     max-width: 11rem;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.kcj-chrome--page .kcj-account-link {
-    color: var(--kcj-soft-ink);
-}
-
-body:has(.kcj-page--mirror) .kcj-account-link,
-body.kcj-shop-rail-mirror .kcj-account-link,
-body.kcj-pdp-mirror .kcj-account-link {
-    color: var(--kcj-mirror-ink);
-}
-
-body.kcj-shop-rail-all .kcj-account-link {
-    color: var(--kcj-gold);
 }
 
 .kcj-account-link:hover {
