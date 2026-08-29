@@ -69,13 +69,13 @@ $c = $copy[$tone];
                 <a class="kcj-brand-cross" href="<?php echo esc_url($other_url); ?>"><?php echo esc_html($c['cross']); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($home_url); ?>"><?php esc_html_e('Back to the split', 'kcjdrama'); ?></a>
             </div>
+            <?php
+            // Keep quote inside the left column so the 2-col stage grid stays hero | doors.
+            if (!empty($c['epigraph_key']) && function_exists('kcj_the_epigraph')) {
+                kcj_the_epigraph((string) $c['epigraph_key']);
+            }
+            ?>
         </header>
-
-        <?php
-        if (!empty($c['epigraph_key']) && function_exists('kcj_the_epigraph')) {
-            kcj_the_epigraph((string) $c['epigraph_key']);
-        }
-        ?>
 
         <nav class="kcj-world-doors" aria-label="<?php echo $tone === 'mirror' ? esc_attr__('Mirror doors', 'kcjdrama') : esc_attr__('Soft doors', 'kcjdrama'); ?>">
             <?php foreach ($c['doors'] as $i => $door) : ?>

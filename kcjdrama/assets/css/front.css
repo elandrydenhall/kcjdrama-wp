@@ -1174,7 +1174,9 @@ body:has(.kcj-shop--mirror) .kcj-menu a:hover {
 .kcj-paths-hero .kcj-epigraph,
 .kcj-glos-hero .kcj-epigraph,
 .kcj-folio-hero .kcj-epigraph,
-.kcj-victim-hero .kcj-epigraph {
+.kcj-victim-hero .kcj-epigraph,
+.kcj-brand-hero .kcj-epigraph,
+.kcj-desk-hero .kcj-epigraph {
     margin: 1.35rem 0 0;
     max-width: 100%;
 }
@@ -1183,7 +1185,9 @@ body:has(.kcj-shop--mirror) .kcj-menu a:hover {
 .kcj-paths-hero .kcj-epigraph-quote p,
 .kcj-glos-hero .kcj-epigraph-quote p,
 .kcj-folio-hero .kcj-epigraph-quote p,
-.kcj-victim-hero .kcj-epigraph-quote p {
+.kcj-victim-hero .kcj-epigraph-quote p,
+.kcj-brand-hero .kcj-epigraph-quote p,
+.kcj-desk-hero .kcj-epigraph-quote p {
     font-size: clamp(1.2rem, 2.4vw, 1.65rem);
 }
 
