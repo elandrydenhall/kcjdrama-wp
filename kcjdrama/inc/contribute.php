@@ -517,7 +517,7 @@ function kcj_desk_rate_ok($bucket) {
         $wait = 8;
     } elseif ($bucket === 'story') {
         $wait = 12;
-    } elseif ($bucket === 'register' || $bucket === 'apply') {
+    } elseif ($bucket === 'register' || $bucket === 'apply' || $bucket === 'support') {
         $wait = 60;
     }
     if (get_transient($key)) {

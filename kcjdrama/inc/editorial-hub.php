@@ -309,6 +309,18 @@ function kcj_render_editorial_hub($kind) {
                         <a class="kcj-brand-cross" href="<?php echo esc_url($cross2_url); ?>"><?php echo esc_html($cross2_label); ?></a>
                     <?php endif; ?>
                 </div>
+                <?php
+                // Keep epigraph inside the sticky hero column (hub-inner is a 2-col grid).
+                $hub_epigraph = [
+                    'tropes'    => 'tropes-sadness-or-love',
+                    'syndromes' => 'syndromes-twisted-rope',
+                    'essays'    => 'essays-hope-lets-move',
+                    'stories'   => 'stories-how-not-to-fall',
+                ];
+                if (!empty($hub_epigraph[$kind]) && function_exists('kcj_the_epigraph')) {
+                    kcj_the_epigraph($hub_epigraph[$kind]);
+                }
+                ?>
             </header>
 
             <?php if (!$entries) : ?>

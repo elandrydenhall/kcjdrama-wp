@@ -93,22 +93,25 @@ a {
 
 .kcj-hero-plate {
     position: relative;
+    overflow: hidden;
     aspect-ratio: 16 / 9;
-    width: min(100%, calc(100vh * 16 / 9));
-    max-height: 100vh;
+    width: min(100%, calc(90vh * 16 / 9));
+    max-height: 90vh;
 }
 
 @supports (height: 100dvh) {
     .kcj-hero-plate {
-        width: min(100%, calc(100dvh * 16 / 9));
-        max-height: 100dvh;
+        width: min(100%, calc(90dvh * 16 / 9));
+        max-height: 90dvh;
     }
 }
 
 .kcj-hero--desktop img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 
 .kcj-hero--stack {
@@ -1032,6 +1035,156 @@ body:has(.kcj-shop--mirror) .kcj-menu a:hover {
 
 .kcj-onramp .kcj-brand-teasers-title {
     margin: 0 0 0.35rem;
+}
+
+.kcj-onramp-guide {
+    margin: 2rem 0 0.5rem;
+    max-width: 42rem;
+}
+
+.kcj-onramp-steps {
+    margin: 0.75rem 0 1rem;
+    padding-left: 1.2rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.kcj-onramp-steps li {
+    margin: 0 0 0.85rem;
+}
+
+.kcj-onramp-steps strong {
+    font-weight: 600;
+    color: var(--kcj-soft-accent);
+}
+
+.kcj-onramp-aside {
+    margin: 0;
+    font-weight: 300;
+    line-height: 1.55;
+    opacity: 0.88;
+}
+
+.kcj-onramp-rails {
+    margin: 2rem 0 0.5rem;
+}
+
+.kcj-onramp-secondary {
+    margin: 1rem 0 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.kcj-onramp-secondary a {
+    color: var(--kcj-soft-accent);
+    text-decoration: none;
+}
+
+.kcj-onramp-secondary a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.kcj-onramp-buy {
+    margin: 2.25rem 0 0;
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--kcj-soft-line);
+    max-width: 42rem;
+}
+
+.kcj-desk-prose {
+    margin: 0 0 0.9rem;
+    font-weight: 300;
+    line-height: 1.65;
+}
+
+.kcj-desk-prose:last-child {
+    margin-bottom: 0;
+}
+
+.kcj-country-desk .kcj-brand-folio {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.55;
+}
+
+.kcj-epigraph {
+    margin: 1.75rem 0 2rem;
+    padding: 1.35rem 1.25rem 1.4rem;
+    border-radius: var(--kcj-radius-card);
+    background: var(--kcj-soft-surface);
+    border: 1px solid var(--kcj-soft-line);
+    border-left: 3px solid var(--kcj-soft-accent);
+}
+
+.kcj-epigraph-quote {
+    margin: 0;
+}
+
+.kcj-epigraph-quote p {
+    margin: 0;
+    font-family: var(--kcj-soft-display);
+    font-size: clamp(1.55rem, 3.6vw, 2.35rem);
+    line-height: 1.28;
+    font-weight: 500;
+    color: var(--kcj-soft-ink);
+    quotes: "\201C" "\201D";
+}
+
+.kcj-epigraph-quote p::before {
+    content: open-quote;
+    margin-right: 0.08em;
+    color: var(--kcj-soft-accent);
+}
+
+.kcj-epigraph-quote p::after {
+    content: close-quote;
+    margin-left: 0.04em;
+    color: var(--kcj-soft-accent);
+}
+
+.kcj-epigraph-cite {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0.95rem 0 0;
+}
+
+.kcj-epigraph-attr {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--kcj-soft-accent);
+}
+
+.kcj-epigraph-note {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.45;
+    opacity: 0.78;
+}
+
+/* Sticky left columns: keep quote inside hero so 2-col grids don't break */
+.kcj-hub-hero .kcj-epigraph,
+.kcj-paths-hero .kcj-epigraph,
+.kcj-glos-hero .kcj-epigraph,
+.kcj-folio-hero .kcj-epigraph,
+.kcj-victim-hero .kcj-epigraph {
+    margin: 1.35rem 0 0;
+    max-width: 100%;
+}
+
+.kcj-hub-hero .kcj-epigraph-quote p,
+.kcj-paths-hero .kcj-epigraph-quote p,
+.kcj-glos-hero .kcj-epigraph-quote p,
+.kcj-folio-hero .kcj-epigraph-quote p,
+.kcj-victim-hero .kcj-epigraph-quote p {
+    font-size: clamp(1.2rem, 2.4vw, 1.65rem);
 }
 
 /* ---- Tropes / Syndromes editorial hubs ---- */
@@ -3607,7 +3760,7 @@ html.kcj-rose-open {
 }
 
 .kcj-site-footer-inner {
-    max-width: 52rem;
+    max-width: 72rem;
     margin: 0 auto;
 }
 
@@ -3618,12 +3771,45 @@ html.kcj-rose-open {
 }
 
 .kcj-site-footer-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem 1rem;
+    display: grid;
+    gap: 1.15rem 1.5rem;
+    grid-template-columns: 1fr;
     font-size: 0.8rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+    .kcj-site-footer-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 960px) {
+    .kcj-site-footer-nav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    .kcj-site-footer-nav {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+.kcj-footer-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+}
+
+.kcj-footer-label {
+    margin: 0 0 0.15rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    opacity: 0.55;
 }
 
 .kcj-site-footer-nav a {
@@ -5742,6 +5928,56 @@ body.single-product .woocommerce-breadcrumb {
 .kcj-policy-footer-links > a:not(.kcj-btn):hover {
     text-decoration: underline;
     text-underline-offset: 3px;
+}
+
+/* ---- Support (/support) ---- */
+
+.kcj-support-form-wrap {
+    margin: 0 0 2rem;
+    padding: 1.25rem 1.2rem 1.4rem;
+    border-radius: var(--kcj-radius-card);
+    background: var(--kcj-soft-surface);
+    border: 1px solid var(--kcj-soft-line);
+}
+
+.kcj-support-form-wrap > h2 {
+    margin: 0 0 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--kcj-soft-accent);
+}
+
+.kcj-support-notice {
+    margin: 0 0 1rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.kcj-support-notice--ok {
+    background: rgba(201, 123, 154, 0.12);
+    border: 1px solid rgba(201, 123, 154, 0.35);
+}
+
+.kcj-support-notice--err {
+    background: rgba(120, 40, 60, 0.08);
+    border: 1px solid rgba(120, 40, 60, 0.25);
+}
+
+.kcj-support-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.kcj-support-form .kcj-btn {
+    justify-self: start;
+    margin-top: 0.25rem;
 }
 
 /* ---- Mirror Victim Log ---- */

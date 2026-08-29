@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 $shop = function_exists('kcj_catalog_url') ? kcj_catalog_url(['rail' => 'all']) : kcj_page_url('shop');
 $about = kcj_page_url('about');
 $policy = kcj_page_url('editorial-policy');
-$contact = kcj_page_url('contact');
+$support = kcj_page_url('support');
 
 get_header();
 ?>
@@ -22,11 +22,13 @@ get_header();
                 <?php esc_html_e('Soft and Mirror merch is printed after you order — not pulled off a warehouse shelf. Here is what that means, in plain language, so you can check out without guessing.', 'kcjdrama'); ?>
             </p>
             <div class="kcj-brand-actions">
-                <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($contact); ?>"><?php esc_html_e('Talk to a human', 'kcjdrama'); ?></a>
+                <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($support); ?>"><?php esc_html_e('Talk to a human', 'kcjdrama'); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Shop the split', 'kcjdrama'); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($about); ?>"><?php esc_html_e('About', 'kcjdrama'); ?></a>
             </div>
         </header>
+
+        <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('ship-there-is-a-way'); } ?>
 
         <section class="kcj-policy-grid" aria-label="<?php esc_attr_e('Fulfillment', 'kcjdrama'); ?>">
             <article class="kcj-policy-card" id="fulfillment">
@@ -59,12 +61,12 @@ get_header();
             </article>
             <article>
                 <h2><?php esc_html_e('A human, not a maze', 'kcjdrama'); ?></h2>
-                <p><?php esc_html_e('Use the contact page. Include the order number and, for defects, a photo in good light. We read the mail. We do not outsource the apology.', 'kcjdrama'); ?></p>
+                <p><?php esc_html_e('Use Support. Include the order number and, for defects, a photo in good light. We read the mail. We do not outsource the apology.', 'kcjdrama'); ?></p>
             </article>
         </section>
 
         <section class="kcj-policy-footer-links" aria-label="<?php esc_attr_e('Related', 'kcjdrama'); ?>">
-            <a href="<?php echo esc_url($contact); ?>"><?php esc_html_e('Contact', 'kcjdrama'); ?></a>
+            <a href="<?php echo esc_url($support); ?>"><?php esc_html_e('Support', 'kcjdrama'); ?></a>
             <a href="<?php echo esc_url($policy); ?>"><?php esc_html_e('Editorial policy', 'kcjdrama'); ?></a>
             <a href="<?php echo esc_url($about); ?>"><?php esc_html_e('About', 'kcjdrama'); ?></a>
             <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Open the catalog', 'kcjdrama'); ?></a>

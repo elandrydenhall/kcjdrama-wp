@@ -37,6 +37,7 @@ get_header();
                     <a class="kcj-brand-cross" href="<?php echo esc_url($tropes); ?>"><?php esc_html_e('Tropes', 'kcjdrama'); ?></a>
                     <a class="kcj-brand-cross" href="<?php echo esc_url($stories); ?>"><?php esc_html_e('Stories', 'kcjdrama'); ?></a>
                 </div>
+                <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('essays-hope-lets-move'); } ?>
             </div>
         </header>
 

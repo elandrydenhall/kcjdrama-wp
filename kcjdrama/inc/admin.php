@@ -173,13 +173,22 @@ function kcj_render_rotation_page() {
     }
     if (isset($_POST['kcj_rotation_nonce']) && wp_verify_nonce($_POST['kcj_rotation_nonce'], 'kcj_save_rotation')) {
         update_option('kcj_rotate_interval', sanitize_key($_POST['kcj_rotate_interval'] ?? 'hourly'));
-        update_option('kcj_force_hero_id', (int) ($_POST['kcj_force_hero_id'] ?? 0));
         if (!empty($_POST['kcj_rotate_now'])) {
+            // Advance ignores pin for this click; clear force so cron/manual rotate can move.
             delete_option('kcj_force_hero_id');
             update_option('kcj_force_hero_id', 0);
+            $before = (int) get_option('kcj_current_hero_id', 0);
             kcj_advance_hero();
+            $after = (int) get_option('kcj_current_hero_id', 0);
+            $label = $after ? esc_html(get_the_title($after)) . ' (#' . $after . ')' : 'None';
+            echo '<div class="updated"><p>Advanced to ' . $label . '.</p></div>';
+            if ($before === $after) {
+                echo '<div class="notice notice-warning"><p>Current hero did not change (only one published hero, or advance was blocked).</p></div>';
+            }
+        } else {
+            update_option('kcj_force_hero_id', (int) ($_POST['kcj_force_hero_id'] ?? 0));
+            echo '<div class="updated"><p>Saved.</p></div>';
         }
-        echo '<div class="updated"><p>Saved.</p></div>';
     }
 
     $interval = kcj_rotate_interval();

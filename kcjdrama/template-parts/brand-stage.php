@@ -22,6 +22,7 @@ $copy = [
         'kicker'  => 'Soft World',
         'lede'    => 'Porcelain romance for the sincere desk — champagne light, craft before the joke.',
         'body'    => 'This is where the inheritance lands and love stays. Tropes as craft notes. Merch you can wear to a rewatch without explaining yourself.',
+        'epigraph_key' => 'soft-already-beautiful',
         'cta'     => 'Shop Soft merch',
         'cross'   => 'Cross to Mirror',
         'doors'   => [
@@ -38,6 +39,7 @@ $copy = [
         'kicker'  => 'Mirror World',
         'lede'    => 'Violet circuit roast — orchid heat, no plot armor, syndromes named out loud.',
         'body'    => 'We roast the tropes so you don’t have to. Same drama DNA as Soft — louder, meaner, still wearable.',
+        'epigraph_key' => 'mirror-weed-wont-crush',
         'cta'     => 'Shop Mirror merch',
         'cross'   => 'Cross to Soft',
         'doors'   => [
@@ -68,6 +70,12 @@ $c = $copy[$tone];
                 <a class="kcj-brand-cross" href="<?php echo esc_url($home_url); ?>"><?php esc_html_e('Back to the split', 'kcjdrama'); ?></a>
             </div>
         </header>
+
+        <?php
+        if (!empty($c['epigraph_key']) && function_exists('kcj_the_epigraph')) {
+            kcj_the_epigraph((string) $c['epigraph_key']);
+        }
+        ?>
 
         <nav class="kcj-world-doors" aria-label="<?php echo $tone === 'mirror' ? esc_attr__('Mirror doors', 'kcjdrama') : esc_attr__('Soft doors', 'kcjdrama'); ?>">
             <?php foreach ($c['doors'] as $i => $door) : ?>

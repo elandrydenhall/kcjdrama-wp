@@ -233,7 +233,7 @@ def export_local_pack() -> Path:
         "eval-file",
         str(exporter),
     ]
-    print("Exporting local pages/tags/cats (no products) …")
+    print("Exporting local pages/heroes/quotes/tags/cats (no products) …")
     proc = subprocess.run(cmd, cwd=str(LOCAL_WP), capture_output=True, text=True)
     if proc.stdout:
         print(proc.stdout.strip()[:1500])
@@ -257,12 +257,94 @@ def remote_php(client: paramiko.SSHClient) -> str:
     return php
 
 
+def _sftp_mkdirs(sftp: paramiko.SFTPClient, remote_dir: str) -> None:
+    parts = [p for p in remote_dir.replace("\\", "/").split("/") if p]
+    cur = ""
+    for part in parts:
+        cur += "/" + part
+        try:
+            sftp.stat(cur)
+        except OSError:
+            try:
+                sftp.mkdir(cur)
+            except OSError:
+                pass
+
+
+def _resolve_local_media(rel: str) -> Path | None:
+    """Find a readable local copy of an uploads-relative file.
+
+    Some plates under wordpress/wp-content/uploads are locked by Apache on Windows.
+    Prefer a staging tree, then direct path, then HTTP fetch from local WP.
+    """
+    import urllib.request
+
+    rel = rel.replace("\\", "/").lstrip("/")
+    staging = LOCAL_WP / "_ship_media_tmp"
+    candidates = [
+        staging.joinpath(*rel.split("/")),
+        (LOCAL_WP / "wordpress" / "wp-content" / "uploads").joinpath(*rel.split("/")),
+    ]
+    for path in candidates:
+        try:
+            if path.is_file() and path.stat().st_size > 0:
+                with path.open("rb") as fh:
+                    fh.read(1)
+                return path
+        except OSError:
+            continue
+
+    # Last resort: pull via local Apache (can read files this process cannot).
+    staged = staging.joinpath(*rel.split("/"))
+    staged.parent.mkdir(parents=True, exist_ok=True)
+    url = f"http://127.0.0.1:8080/wp-content/uploads/{rel}"
+    try:
+        urllib.request.urlretrieve(url, staged)
+        if staged.is_file() and staged.stat().st_size > 0:
+            return staged
+    except OSError as exc:
+        print(f"  HTTP fetch failed for {rel}: {exc}")
+    return None
+
+
+def upload_pack_media(client: paramiko.SSHClient, wp_root: str, pack: Path) -> int:
+    """SFTP hero plate files listed in pack['media'] into remote uploads/. Returns count uploaded."""
+    import json
+
+    data = json.loads(pack.read_text(encoding="utf-8"))
+    media = data.get("media") or []
+    if not media:
+        print("No pack media to upload.")
+        return 0
+
+    remote_uploads = f"{wp_root.rstrip('/')}/wp-content/uploads"
+    sftp = client.open_sftp()
+    uploaded = 0
+    for item in media:
+        rel = str((item or {}).get("rel") or "").replace("\\", "/").lstrip("/")
+        if not rel or ".." in rel:
+            continue
+        local = _resolve_local_media(rel)
+        if local is None:
+            print(f"  skip missing/unreadable local media: {rel}")
+            continue
+        remote = f"{remote_uploads}/{rel}"
+        _sftp_mkdirs(sftp, remote.rsplit("/", 1)[0])
+        print(f"  upload {rel} ({local.stat().st_size} bytes)")
+        sftp.put(str(local), remote)
+        uploaded += 1
+    sftp.close()
+    print(f"Uploaded media files: {uploaded}")
+    return uploaded
+
+
 def apply_remote_content(
     client: paramiko.SSHClient,
     wp_root: str,
     stamp: str,
     pack: Path,
 ) -> None:
+    upload_pack_media(client, wp_root, pack)
     apply_src = LOCAL_WP / "scripts" / "apply-hostinger-content.php"
     remote_dir = f"/tmp/kcj-ship-{stamp}"
     run(client, f"mkdir -p '{remote_dir}'")
@@ -273,14 +355,16 @@ def apply_remote_content(
     php = remote_php(client)
     print("Remote php:", php)
     cmd = f"{php} '{remote_dir}/apply.php' '{wp_root}' '{remote_dir}/pack.json'"
-    out, err, code = run(client, cmd, timeout=180)
-    print(out.strip()[-2500:] if out.strip() else "(no apply stdout)")
+    out, err, code = run(client, cmd, timeout=600)
+    # Print tail so heroes/quotes summary is visible.
+    text = out.strip() if out.strip() else "(no apply stdout)"
+    print(text[-4000:] if len(text) > 4000 else text)
     if code != 0:
         print("APPLY ERR", (err or "")[:1200])
         run(client, f"rm -rf '{remote_dir}'")
         raise SystemExit(code)
     run(client, f"rm -rf '{remote_dir}'")
-    # LiteSpeed / generic caches — do not touch uploads or products.
+    # LiteSpeed / generic caches — do not delete uploads; products untouched.
     run(
         client,
         f"rm -rf '{wp_root}/wp-content/cache' '{wp_root}/wp-content/litespeed' 2>/dev/null || true",
@@ -296,12 +380,12 @@ def apply_only_main() -> int:
     wp_root = wp_root_from_theme(theme_remote)
     apply_remote_content(client, wp_root, stamp, pack)
     client.close()
-    print("Re-applied pages/tags/cats. Products untouched.")
+    print("Re-applied pages/heroes/quotes/tags/cats. Products untouched.")
     return 0
 
 
 def ship_main() -> int:
-    """Theme + pages + merch tags/cats. Never ships or rewrites products."""
+    """Theme + pages + heroes + quotes + merch tags/cats. Never ships products."""
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     pack = export_local_pack()
     backup_local(stamp)
@@ -319,7 +403,7 @@ def ship_main() -> int:
     out, _, _ = run(client, f"grep -m1 Version '{theme_remote}/style.css' || true")
     print("Live version after:", out.strip())
     client.close()
-    print("Shipped theme + pages + tags + categories. Products left on Hostinger.")
+    print("Shipped theme + pages + heroes + quotes + tags + categories. Products left on Hostinger.")
     print("Check https://kcjdrama.com/ and purge LiteSpeed in hPanel if the home CSS looks old.")
     return 0
 

@@ -49,6 +49,7 @@ get_header();
                 <a class="kcj-brand-cross" href="<?php echo esc_url($soft); ?>"><?php esc_html_e('Soft stage', 'kcjdrama'); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Shop Soft merch', 'kcjdrama'); ?></a>
             </div>
+                <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('stories-how-not-to-fall'); } ?>
         </header>
 
         <div class="kcj-paths-col">

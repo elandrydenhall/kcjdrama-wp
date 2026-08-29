@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 $stories = kcj_page_url('stories');
 $policy = kcj_page_url('editorial-policy');
 $shipping = kcj_page_url('shipping-returns');
-$contact = kcj_page_url('contact');
+$support = kcj_page_url('support');
 
 get_header();
 ?>
@@ -28,6 +28,8 @@ get_header();
             </div>
         </header>
 
+        <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('faq-plan-might-change'); } ?>
+
         <?php
         if (function_exists('kcj_render_desk_faq')) {
             kcj_render_desk_faq('h2');
@@ -44,7 +46,7 @@ get_header();
         <section class="kcj-policy-footer-links" aria-label="<?php esc_attr_e('Related', 'kcjdrama'); ?>">
             <a href="<?php echo esc_url($stories); ?>#kcj-desk"><?php esc_html_e('Stories desk', 'kcjdrama'); ?></a>
             <a href="<?php echo esc_url($policy); ?>"><?php esc_html_e('Editorial policy', 'kcjdrama'); ?></a>
-            <a href="<?php echo esc_url($contact); ?>"><?php esc_html_e('Contact', 'kcjdrama'); ?></a>
+            <a href="<?php echo esc_url($support); ?>"><?php esc_html_e('Support', 'kcjdrama'); ?></a>
             <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($shipping); ?>"><?php esc_html_e('Shipping & returns', 'kcjdrama'); ?></a>
         </section>
     </div>

@@ -250,41 +250,36 @@ function kcj_mega_ensure_pages() {
     );
 
     // Country desks under /countries/
-    kcj_mega_upsert_page('countries', 'Countries', '<p>Three desks. One romance language family.</p><ul><li><a href="' . esc_url(home_url('/countries/korea/')) . '">Korea</a></li><li><a href="' . esc_url(home_url('/countries/china/')) . '">China</a></li><li><a href="' . esc_url(home_url('/countries/japan/')) . '">Japan</a></li></ul>');
+    kcj_mega_upsert_page(
+        'countries',
+        'Countries',
+        '<p class="kcj-lede">Three Soft desks. One romance language family. Theme templates own the primers — this body is a fallback seed only.</p>
+        <ul>
+            <li><a href="' . esc_url(home_url('/countries/korea/')) . '">Korea desk</a></li>
+            <li><a href="' . esc_url(home_url('/countries/china/')) . '">China desk</a></li>
+            <li><a href="' . esc_url(home_url('/countries/japan/')) . '">Japan desk</a></li>
+            <li><a href="' . esc_url(home_url('/start-here/')) . '">Start here</a></li>
+        </ul>'
+    );
 
     kcj_mega_upsert_page(
         'korea',
         'Korea desk',
-        '<p class="kcj-lede">K-romance runs on compressed time: roughly sixteen episodes to invent a private world, break it, and choose it again.</p>
-        <h2>What it feels like</h2>
-        <p>Status gaps (often chaebol-coded), OST as emotional architecture, friend-group found family, and a cultural fluency with second-lead heartbreak.</p>
-        <h2>Soft desk picks to read</h2>
-        <ul><li>Chaebol inheritance war</li><li>OST as emotional architecture</li><li>Second lead magnetic</li><li>Car confession chase</li></ul>
-        <p><a href="' . esc_url($tropes_url) . '">Open tropes</a> · <a href="' . esc_url(get_category_link(get_term_by('slug', 'korea', 'category'))) . '">Korea-tagged posts</a></p>',
+        '<p class="kcj-lede">Fallback seed. Live Soft primer is page-korea.php.</p>',
         'countries'
     );
 
     kcj_mega_upsert_page(
         'china',
         'China desk',
-        '<p class="kcj-lede">C-romance stretches — web-novel pacing, destiny metaphors, and public catharsis (face-slapping) beside private softness.</p>
-        <h2>What it feels like</h2>
-        <p>Xianxia and palace stakes make love cosmically expensive. Transmigration grants agency. Danmei literacy matters internationally — we teach terms, we don’t host pirated text.</p>
-        <h2>Soft desk picks</h2>
-        <ul><li>Transmigration into the book</li><li>Face-slapping court arc</li><li>Red-thread destiny</li><li>Villainess rewrites fate</li></ul>
-        <p><a href="' . esc_url(get_category_link(get_term_by('slug', 'china', 'category'))) . '">China-tagged posts</a></p>',
+        '<p class="kcj-lede">Fallback seed. Live Soft primer is page-china.php.</p>',
         'countries'
     );
 
     kcj_mega_upsert_page(
         'japan',
         'Japan desk',
-        '<p class="kcj-lede">J-romance often wins by subtraction: fewer speeches, more weather, more workplace air you can almost taste.</p>
-        <h2>What it feels like</h2>
-        <p>Shokuba hierarchy, slow-burn silence, confessions that arrive like last trains. Everyday life is the epic.</p>
-        <h2>Soft desk picks</h2>
-        <ul><li>Slow-burn silence</li><li>Office senpai distance</li><li>Last-episode confession</li><li>Food as love language</li></ul>
-        <p><a href="' . esc_url(get_category_link(get_term_by('slug', 'japan', 'category'))) . '">Japan-tagged posts</a></p>',
+        '<p class="kcj-lede">Fallback seed. Live Soft primer is page-japan.php.</p>',
         'countries'
     );
 }

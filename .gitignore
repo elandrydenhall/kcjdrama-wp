@@ -18,5 +18,17 @@ _inbox/
 .grok/
 
 _tmp*
-
+_ship_media_tmp/
 _hostinger_pull/
+
+# Generated Hostinger pack (rebuild via export-hostinger-pack.php)
+scripts/_hostinger-pack.json
+
+# Local scrape scratch / botched heal experiments
+scripts/quotes/raw/
+scripts/quotes/*.sqlite3
+kcjdrama/assets/seed/*.bad*
+kcjdrama/assets/seed/*.bak
+kcjdrama/assets/seed/*botched*
+kcjdrama/assets/brand/*.bad*
+kcjdrama/assets/brand/*NOT-A-LOGO*

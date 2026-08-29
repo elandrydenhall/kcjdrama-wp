@@ -76,6 +76,7 @@ get_header();
                 <a class="kcj-brand-cross" href="<?php echo esc_url($roast); ?>"><?php esc_html_e('About the roast', 'kcjdrama'); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($mirror); ?>"><?php esc_html_e('Mirror stage', 'kcjdrama'); ?></a>
             </div>
+                <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('victim-swing-own-sword'); } ?>
         </header>
 
         <nav class="kcj-hub-chips kcj-victim-chips" aria-label="<?php esc_attr_e('Jump to casualty', 'kcjdrama'); ?>">

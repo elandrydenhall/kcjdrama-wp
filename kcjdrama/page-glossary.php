@@ -63,6 +63,7 @@ get_header();
                 <a class="kcj-brand-cross" href="<?php echo esc_url($soft); ?>"><?php esc_html_e('Soft stage', 'kcjdrama'); ?></a>
                 <a class="kcj-brand-cross" href="<?php echo esc_url($policy); ?>"><?php esc_html_e('Editorial policy', 'kcjdrama'); ?></a>
             </div>
+                <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('glossary-i-am-here'); } ?>
         </header>
 
         <div class="kcj-glos-catalog">

@@ -11,7 +11,7 @@ $shop_all = function_exists('kcj_catalog_url') ? kcj_catalog_url(['rail' => 'all
 $shipping = kcj_page_url('shipping-returns');
 $policy = kcj_page_url('editorial-policy');
 $privacy = get_privacy_policy_url() ?: home_url('/privacy-policy/');
-$contact = kcj_page_url('contact');
+$support = kcj_page_url('support');
 $soft = kcj_page_url('soft');
 $mirror = kcj_page_url('mirror');
 $start = kcj_page_url('start-here');
@@ -28,6 +28,8 @@ get_header();
                 <?php esc_html_e('Hi. I’m the person who still pauses on the shared umbrella. I made kcjdrama so you wouldn’t have to explain the feeling.', 'kcjdrama'); ?>
             </p>
         </header>
+
+        <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('about-liking-not-shameful'); } ?>
 
         <div class="kcj-about-bio">
             <p><?php esc_html_e('I grew up hopping channels between Korean, Chinese, and Japanese romance without a map — chaebol rain, palace heat, office silence — and I never wanted to pick a favorite country so much as keep a seat for all three. The OST still gets me in the grocery store. I rewind the almost-confession more than the kiss.', 'kcjdrama'); ?></p>
@@ -61,7 +63,7 @@ get_header();
                 <li><a href="<?php echo esc_url($shipping); ?>"><?php esc_html_e('Shipping & returns', 'kcjdrama'); ?></a></li>
                 <li><a href="<?php echo esc_url($policy); ?>"><?php esc_html_e('Editorial policy', 'kcjdrama'); ?></a></li>
                 <li><a href="<?php echo esc_url($privacy); ?>"><?php esc_html_e('Privacy', 'kcjdrama'); ?></a></li>
-                <li><a href="<?php echo esc_url($contact); ?>"><?php esc_html_e('Contact', 'kcjdrama'); ?></a></li>
+                <li><a href="<?php echo esc_url($support); ?>"><?php esc_html_e('Support', 'kcjdrama'); ?></a></li>
             </ul>
         </section>
     </div>

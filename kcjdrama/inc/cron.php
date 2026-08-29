@@ -44,6 +44,9 @@ function kcj_advance_hero() {
         return;
     }
 
+    // MySQL/wpdb may return string IDs; normalize so strict search cannot stick on first.
+    $ids = array_map('intval', $ids);
+
     $current = (int) get_option('kcj_current_hero_id', 0);
     $index = array_search($current, $ids, true);
     $next = ($index === false) ? $ids[0] : $ids[($index + 1) % count($ids)];

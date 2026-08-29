@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 
 $about = kcj_page_url('about');
 $shipping = kcj_page_url('shipping-returns');
-$contact = kcj_page_url('contact');
+$support = kcj_page_url('support');
 $shop = function_exists('kcj_catalog_url') ? kcj_catalog_url(['rail' => 'all']) : kcj_page_url('shop');
 $tropes = kcj_page_url('tropes');
 $essays = kcj_page_url('essays');
@@ -30,6 +30,8 @@ get_header();
                 <a class="kcj-brand-cross" href="<?php echo esc_url($about); ?>"><?php esc_html_e('About', 'kcjdrama'); ?></a>
             </div>
         </header>
+
+        <?php if (function_exists('kcj_the_epigraph')) { kcj_the_epigraph('policy-worth-of-heart'); } ?>
 
         <section class="kcj-policy-grid" aria-label="<?php esc_attr_e('Policy pillars', 'kcjdrama'); ?>">
             <article class="kcj-policy-card">
@@ -93,7 +95,7 @@ get_header();
         <section class="kcj-policy-footer-links" aria-label="<?php esc_attr_e('Related', 'kcjdrama'); ?>">
             <a href="<?php echo esc_url($shipping); ?>"><?php esc_html_e('Shipping & returns', 'kcjdrama'); ?></a>
             <a href="<?php echo esc_url(kcj_page_url('faq')); ?>"><?php esc_html_e('Desk FAQ', 'kcjdrama'); ?></a>
-            <a href="<?php echo esc_url($contact); ?>"><?php esc_html_e('Contact', 'kcjdrama'); ?></a>
+            <a href="<?php echo esc_url($support); ?>"><?php esc_html_e('Support', 'kcjdrama'); ?></a>
             <a href="<?php echo esc_url($about); ?>"><?php esc_html_e('About', 'kcjdrama'); ?></a>
             <a class="kcj-btn kcj-btn--soft" href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Open the catalog', 'kcjdrama'); ?></a>
         </section>

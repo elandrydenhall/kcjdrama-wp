@@ -41,19 +41,13 @@ if ($is_home) {
         <nav id="kcj-menu" class="kcj-menu" hidden>
             <?php
             $kcj_menu_items = [
-                ['url' => kcj_page_url('start-here'), 'label' => 'Start here', 'match' => 'start-here'],
                 ['url' => kcj_page_url('soft'), 'label' => 'Soft', 'match' => 'soft'],
                 ['url' => kcj_page_url('mirror'), 'label' => 'Mirror', 'match' => 'mirror'],
                 ['url' => kcj_page_url('shop'), 'label' => 'Shop', 'match' => 'shop'],
                 ['url' => kcj_page_url('tropes'), 'label' => 'Tropes', 'match' => 'tropes'],
-                ['url' => kcj_page_url('syndromes'), 'label' => 'Syndromes', 'match' => 'syndromes'],
-                ['url' => kcj_page_url('glossary'), 'label' => 'Glossary', 'match' => 'glossary'],
-                ['url' => kcj_page_url('essays'), 'label' => 'Essays', 'match' => 'essays'],
-                ['url' => kcj_field_notes_url(), 'label' => 'Field notes', 'match' => 'field-notes'],
                 ['url' => kcj_page_url('stories'), 'label' => 'Stories', 'match' => 'stories'],
                 ['url' => kcj_page_url('about'), 'label' => 'About', 'match' => 'about'],
-                ['url' => kcj_page_url('editorial-policy'), 'label' => 'Editorial policy', 'match' => 'editorial-policy'],
-                ['url' => kcj_page_url('victim-log'), 'label' => 'Victim Log', 'match' => 'victim-log'],
+                ['url' => kcj_page_url('start-here'), 'label' => 'Start here', 'match' => 'start-here'],
             ];
             $here_path = trim((string) wp_parse_url(home_url(add_query_arg([])), PHP_URL_PATH), '/');
             foreach ($kcj_menu_items as $item) {

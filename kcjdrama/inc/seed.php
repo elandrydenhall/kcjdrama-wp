@@ -33,6 +33,7 @@ function kcj_seed_pages() {
         'about-the-roast'  => ['title' => 'About the Roast', 'content' => '<p>The Mirror side is the roast. Same tropes, no plot armor.</p>'],
         'victim-log'       => ['title' => 'Victim Log', 'content' => '<p>A running list of tropes that did not survive.</p>'],
         'faq'              => ['title' => 'FAQ', 'content' => '<p>Pass OR Fail for the Soft desk.</p>'],
+        'support'          => ['title' => 'Support', 'content' => '<p>Order help, defects, and a human inbox.</p>'],
     ];
 
     foreach ($pages as $slug => $data) {

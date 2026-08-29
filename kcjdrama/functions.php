@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('KCJ_VERSION', '1.5.70');
+define('KCJ_VERSION', '1.5.81');
 define('KCJ_PATH', get_template_directory());
 define('KCJ_URI', get_template_directory_uri());
 
@@ -23,6 +23,9 @@ require_once KCJ_PATH . '/inc/catalog.php';
 require_once KCJ_PATH . '/inc/editorial-hub.php';
 require_once KCJ_PATH . '/inc/contribute.php';
 require_once KCJ_PATH . '/inc/ai-story.php';
+require_once KCJ_PATH . '/inc/support.php';
+require_once KCJ_PATH . '/inc/quotes.php';
+require_once KCJ_PATH . '/inc/country-desk.php';
 
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
@@ -80,7 +83,7 @@ function kcj_is_brand_stage() {
     if (is_front_page() || is_home() || is_archive() || is_singular('kcj_story')) {
         return true;
     }
-    return is_page(['soft', 'mirror', 'about', 'stories', 'about-the-roast', 'victim-log', 'tropes', 'syndromes', 'essays', 'editorial-policy', 'glossary', 'start-here', 'shipping-returns', 'sign-in', 'faq']);
+    return is_page(['soft', 'mirror', 'about', 'stories', 'about-the-roast', 'victim-log', 'tropes', 'syndromes', 'essays', 'editorial-policy', 'glossary', 'start-here', 'shipping-returns', 'sign-in', 'faq', 'support', 'countries', 'korea', 'china', 'japan']);
 }
 
 /** Woo screens that need plugin CSS/JS. */
@@ -216,13 +219,13 @@ function kcj_get_current_hero() {
         $hotspots = is_array($decoded) ? $decoded : [];
     }
 
-    return [
+    return apply_filters('kcj_current_hero', [
         'id'             => (int) $post->ID,
         'image_url'      => $image_url,
         'has_baked_menu' => (bool) get_post_meta($post->ID, '_kcj_has_baked_menu', true),
         'hotspots'       => $hotspots,
         'alt'            => get_the_title($post),
-    ];
+    ]);
 }
 
 function kcj_first_hero() {
