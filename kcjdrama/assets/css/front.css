@@ -328,9 +328,6 @@ body.kcj-debug-hotspots .kcj-hotspot {
 .kcj-chrome--home .kcj-account-link,
 body:has(.kcj-page--mirror) .kcj-account-link,
 body:has(.kcj-page--soft) .kcj-account-link,
-body.kcj-shop-rail-mirror .kcj-account-link,
-body.kcj-shop-rail-soft .kcj-account-link,
-body.kcj-shop-rail-all .kcj-account-link,
 body.kcj-pdp-mirror .kcj-account-link,
 body.kcj-pdp-soft .kcj-account-link {
     font-size: 1rem;
@@ -346,9 +343,19 @@ body.kcj-pdp-soft .kcj-account-link {
     text-overflow: ellipsis;
 }
 
+/* Shop catalog: Guest / sign-in reads gold. */
+body.kcj-shop-rail-all .kcj-account-link,
+body.kcj-shop-rail-soft .kcj-account-link,
+body.kcj-shop-rail-mirror .kcj-account-link,
+body:has(.kcj-shop) .kcj-account-link {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #da4;
+    text-shadow: none;
+}
+
 /* Black Guest/name on violet Mirror needs a light halo to read. */
 body:has(.kcj-page--mirror) .kcj-account-link,
-body.kcj-shop-rail-mirror .kcj-account-link,
 body.kcj-pdp-mirror .kcj-account-link {
     text-shadow:
         0 0 0.35rem rgba(246, 239, 255, 0.95),
