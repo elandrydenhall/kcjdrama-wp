@@ -364,7 +364,8 @@ body.kcj-shop-rail-all .kcj-account-link {
     padding: 0.15rem 0.35rem;
 }
 
-.kcj-page--mirror .kcj-mini-mark,
+/* Mark lives in <header>, outside <main class="kcj-page--mirror"> — use :has like account-link. */
+body:has(.kcj-page--mirror) .kcj-mini-mark,
 body.kcj-shop-rail-mirror .kcj-mini-mark,
 body.kcj-pdp-mirror .kcj-mini-mark {
     color: var(--kcj-mirror-ink);
