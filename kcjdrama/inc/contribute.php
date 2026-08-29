@@ -1672,6 +1672,7 @@ function kcj_render_desk_faq($heading_tag = 'h3') {
                     <li><?php esc_html_e('Stills, screenshots, OST files, subtitle files, piracy links.', 'kcjdrama'); ?></li>
                     <li><?php esc_html_e('Punching down at a real actor’s body or private life.', 'kcjdrama'); ?></li>
                     <li><?php esc_html_e('Oral sex or coitus on the page — even one small line or euphemism.', 'kcjdrama'); ?></li>
+                    <li><?php esc_html_e('Crude genital slang (pussy, cock, dick, and friends) — even as a joke, typo, or compound like “pussy dorms.”', 'kcjdrama'); ?></li>
                 </ul>
             </article>
         </section>

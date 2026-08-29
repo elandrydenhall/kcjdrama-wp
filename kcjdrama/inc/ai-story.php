@@ -69,6 +69,7 @@ PASS only if ALL are true:
 - Not empty, not spam, on-brief as Soft fiction.
 - Sexual content that MAY pass: kissing, massage, holding, fade-to-black (a door closes, the lights go out). Rain, neon, and umbrellas do not excuse a sex act.
 - FAIL oral sex and coitus, including a single small line, euphemism, or innuendo. Not only graphic porn. FAIL examples: "her head bobbed up and down", "went down on", mouth on genitals, thrusting/penetration on the page. Soft heat is not a sex act written out.
+- FAIL crude genital slang even when no sex act is shown — including typos and "joke" compounds. FAIL examples: "pussy", "pussy dorms", "cock", "dick", "cunt", "clit" used as body/insult slang. Soft may imply desire; it does not name genitals in porn vocabulary.
 
 If pass is true, reasons may be empty. Do not use the word "clear" as a reason.
 If pass is false, reasons must name the policy miss in plain English (one line each).
@@ -76,7 +77,7 @@ PROMPT;
 }
 
 /**
- * Local veto so oral/coital lines cannot pass even if Grok is generous.
+ * Local veto so crude heat / sex-act lines cannot pass even if Grok is generous.
  *
  * @return string Hold reason, or empty if the local screen does not fire.
  */
@@ -85,6 +86,24 @@ function kcj_ai_sex_act_hold($plain) {
     if ($text === '') {
         return '';
     }
+
+    // Genital slang / porn vocabulary — Soft fade-to-black never needs these words.
+    $slang = [
+        '/\bpuss(?:y|ies)\b/u',
+        '/\bcunt\b/u',
+        '/\bclit(?:oris)?\b/u',
+        '/\bcock\b/u',
+        '/\bdick\b/u',
+        '/\bpenis\b/u',
+        '/\bvagina\b/u',
+        '/\bballs?\b.{0,12}\bdeep\b/u',
+    ];
+    foreach ($slang as $re) {
+        if (preg_match($re, $text)) {
+            return 'Crude genital slang is on the page (even as a joke or typo). Soft can imply desire; rewrite without porn vocabulary.';
+        }
+    }
+
     $patterns = [
         '/\bheads?\s+bobb(?:ed|ing)\b.{0,32}\bup\s+and\s+down\b/u',
         '/\bbobb(?:ed|ing)\s+.{0,20}\bheads?\b.{0,32}\bup\s+and\s+down\b/u',
