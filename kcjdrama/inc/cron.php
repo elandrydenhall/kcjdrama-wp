@@ -5,7 +5,12 @@ if (!defined('ABSPATH')) {
 
 add_action('init', function () {
     $interval = kcj_rotate_interval();
-    if (!wp_next_scheduled('kcj_rotate_hero')) {
+    $next = wp_next_scheduled('kcj_rotate_hero');
+    $event = function_exists('wp_get_scheduled_event') ? wp_get_scheduled_event('kcj_rotate_hero') : null;
+    $schedule_ok = is_object($event) && isset($event->schedule) && $event->schedule === $interval;
+
+    if (!$next || !$schedule_ok) {
+        wp_clear_scheduled_hook('kcj_rotate_hero');
         wp_schedule_event(time() + HOUR_IN_SECONDS, $interval, 'kcj_rotate_hero');
     }
 });
@@ -28,6 +33,7 @@ function kcj_rotate_interval() {
 
 function kcj_advance_hero() {
     if ((int) get_option('kcj_force_hero_id', 0) > 0) {
+        update_option('kcj_hero_last_rotate_note', 'skipped_force_pin', false);
         return;
     }
 
@@ -51,4 +57,6 @@ function kcj_advance_hero() {
     $index = array_search($current, $ids, true);
     $next = ($index === false) ? $ids[0] : $ids[($index + 1) % count($ids)];
     update_option('kcj_current_hero_id', (int) $next, false);
+    update_option('kcj_hero_last_rotate_at', time(), false);
+    update_option('kcj_hero_last_rotate_note', 'ok:' . (int) $current . '->' . (int) $next, false);
 }

@@ -194,6 +194,10 @@ function kcj_render_rotation_page() {
     $interval = kcj_rotate_interval();
     $forced = (int) get_option('kcj_force_hero_id', 0);
     $current = (int) get_option('kcj_current_hero_id', 0);
+    $next_ts = wp_next_scheduled('kcj_rotate_hero');
+    $last_ts = (int) get_option('kcj_hero_last_rotate_at', 0);
+    $last_note = (string) get_option('kcj_hero_last_rotate_note', '');
+    $event = function_exists('wp_get_scheduled_event') ? wp_get_scheduled_event('kcj_rotate_hero') : null;
     $heroes = get_posts([
         'post_type'      => 'kcj_hero',
         'post_status'    => 'publish',
@@ -209,6 +213,41 @@ function kcj_render_rotation_page() {
                 <tr>
                     <th>Current</th>
                     <td><?php echo $current ? esc_html(get_the_title($current)) . ' (#' . (int) $current . ')' : 'None'; ?></td>
+                </tr>
+                <tr>
+                    <th>Cron status</th>
+                    <td>
+                        <?php
+                        $tz = wp_timezone();
+                        if ($next_ts) {
+                            $next_local = wp_date('Y-m-d H:i:s T', $next_ts, $tz);
+                            $overdue = $next_ts < time();
+                            echo esc_html(sprintf(
+                                /* translators: 1: schedule name, 2: local datetime */
+                                __('Schedule: %1$s. Next run: %2$s', 'kcjdrama'),
+                                is_object($event) && !empty($event->schedule) ? $event->schedule : $interval,
+                                $next_local
+                            ));
+                            if ($overdue) {
+                                echo ' <strong style="color:#b32d2e;">' . esc_html__('(overdue — waiting for wp-cron)', 'kcjdrama') . '</strong>';
+                            }
+                        } else {
+                            echo esc_html__('No kcj_rotate_hero event scheduled.', 'kcjdrama');
+                        }
+                        echo '<br>';
+                        if ($last_ts > 0) {
+                            echo esc_html(sprintf(
+                                /* translators: 1: local datetime, 2: note */
+                                __('Last advance: %1$s (%2$s)', 'kcjdrama'),
+                                wp_date('Y-m-d H:i:s T', $last_ts, $tz),
+                                $last_note !== '' ? $last_note : 'ok'
+                            ));
+                        } else {
+                            echo esc_html__('Last advance: not recorded yet.', 'kcjdrama');
+                        }
+                        ?>
+                        <p class="description"><?php esc_html_e('Hourly needs a real server cron (or steady traffic). WP-Cron alone only runs when someone visits.', 'kcjdrama'); ?></p>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="kcj_rotate_interval">Cron interval</label></th>
