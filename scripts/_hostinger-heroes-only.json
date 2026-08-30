@@ -1,0 +1,1808 @@
+{
+  "shipped_at": "2026-08-30T16:20:01+00:00",
+  "theme_version": "1.5.89",
+  "pages": [],
+  "heroes": [
+    {
+      "slug": "after-conflict-emotional-healing",
+      "title": "After Conflict Emotional Healing",
+      "menu_order": 0,
+      "image_rel": "2026/08/After-Conflict-Emotional-Healing.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 20.02,
+          "y": 71.22,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 52.73,
+          "y": 56.5,
+          "w": 36.83,
+          "h": 36.76,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "after-the-rescue-hope-begins",
+      "title": "After The Rescue Hope Begins",
+      "menu_order": 0,
+      "image_rel": "2026/08/After-The-Rescue-Hope-Begins.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 11.88,
+          "y": 85.04,
+          "w": 23.56,
+          "h": 10.43,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.85,
+          "y": 85.04,
+          "w": 25.72,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "airport-flight",
+      "title": "Airport Flight",
+      "menu_order": 0,
+      "image_rel": "2026/08/Airport-Flight.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 12,
+          "y": 80,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62,
+          "y": 80,
+          "w": 16,
+          "h": 8,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "bonds-cannot-be-taken",
+      "title": "Bonds Cannot Be Taken",
+      "menu_order": 0,
+      "image_rel": "2026/08/Bonds-Cannot-Be-Taken.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 13.94,
+          "y": 77.9,
+          "w": 19.24,
+          "h": 10.97,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 59.41,
+          "y": 81.01,
+          "w": 27.98,
+          "h": 14.63,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "calm-hearts-explore",
+      "title": "Calm Hearts Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Calm-Hearts-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 4.78,
+          "y": 56.32,
+          "w": 18.42,
+          "h": 9.88,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 66.72,
+          "y": 83.39,
+          "w": 27.88,
+          "h": 11.89,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "facing-pressure-choosing-love",
+      "title": "Facing Pressure Choosing Love",
+      "menu_order": 0,
+      "image_rel": "2026/08/Facing-Pressure-Choosing-Love.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 14.35,
+          "y": 82.11,
+          "w": 20.16,
+          "h": 10.24,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 57.87,
+          "y": 81.01,
+          "w": 33.64,
+          "h": 14.63,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "family-pressure-choose-hope",
+      "title": "Family Pressure Choose Hope",
+      "menu_order": 0,
+      "image_rel": "2026/08/Family-Pressure-Choose-Hope.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 7.58,
+          "y": 71.77,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 55.71,
+          "y": 55.04,
+          "w": 40.64,
+          "h": 35.48,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "fathers-test-strength-love",
+      "title": "Fathers Test Strength Love",
+      "menu_order": 0,
+      "image_rel": "2026/08/Fathers-Test-Strength-Love.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 15.38,
+          "y": 75.34,
+          "w": 18.31,
+          "h": 11.16,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 57.66,
+          "y": 79.18,
+          "w": 27.78,
+          "h": 13.9,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "heroes-love-finds-them",
+      "title": "Heroes Love Finds Them",
+      "menu_order": 0,
+      "image_rel": "2026/08/Heroes-Love-Finds-Them.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 7.78,
+          "y": 37.93,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 55.92,
+          "y": 82.84,
+          "w": 25,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "hope-healing-love",
+      "title": "Hope Healing Love",
+      "menu_order": 0,
+      "image_rel": "2026/08/Hope-Healing-Love.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 15.9,
+          "y": 74.61,
+          "w": 17.9,
+          "h": 9.88,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 74.85,
+          "y": 87.6,
+          "w": 25.15,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "hospital-romance-enter-the-ward",
+      "title": "Hospital Romance Enter The Ward",
+      "menu_order": 0,
+      "image_rel": "2026/08/Hospital-Romance-Enter-The-Ward.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 14.45,
+          "y": 82.84,
+          "w": 21.5,
+          "h": 9.51,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 74.43,
+          "y": 91.26,
+          "w": 20.99,
+          "h": 8.23,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "light-and-dark-and",
+      "title": "Light And Dark And",
+      "menu_order": 0,
+      "image_rel": "2026/08/Light-And-Dark-And.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.41,
+          "y": 12.06,
+          "w": 30.25,
+          "h": 66.21,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 51.08,
+          "y": 18.64,
+          "w": 31.07,
+          "h": 54.87,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-after-the-storm",
+      "title": "Love After The Storm",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-After-The-Storm.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 10.96,
+          "y": 84.85,
+          "w": 21.5,
+          "h": 10.79,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 59.93,
+          "y": 86.68,
+          "w": 23.87,
+          "h": 10.06,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-destiny-beyond-realms",
+      "title": "Love Destiny Beyond Realms",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Destiny-Beyond-Realms.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 12.62,
+          "y": 80.55,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.29,
+          "y": 85.59,
+          "w": 21.4,
+          "h": 9.33,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-gentle-breeze-explore",
+      "title": "Love Gentle Breeze Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Gentle-Breeze-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 10.75,
+          "y": 79.55,
+          "w": 30.35,
+          "h": 15.18,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.03,
+          "y": 89.06,
+          "w": 27.47,
+          "h": 10.94,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-gentle-breeze",
+      "title": "Love Gentle Breeze",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Gentle-Breeze.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 18.07,
+          "y": 79.27,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 75.46,
+          "y": 86.32,
+          "w": 18.21,
+          "h": 8.6,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-grace-strength",
+      "title": "Love Grace Strength",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Grace-Strength.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 3.03,
+          "y": 69.49,
+          "w": 18.11,
+          "h": 10.24,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.85,
+          "y": 85.04,
+          "w": 26.13,
+          "h": 11.89,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-heals-strength-stays",
+      "title": "Love Heals Strength Stays",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Heals-Strength-Stays.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.97,
+          "y": 77.81,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.5,
+          "y": 86.87,
+          "w": 19.75,
+          "h": 8.05,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-stays",
+      "title": "Love Stays",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Stays.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 13.13,
+          "y": 50,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 64.76,
+          "y": 83.39,
+          "w": 22.12,
+          "h": 10.43,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-stories-destruction-choice",
+      "title": "Love Stories Destruction Choice",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Stories-Destruction-Choice.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 8.3,
+          "y": 40.31,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.81,
+          "y": 80.1,
+          "w": 24.49,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "love-tension-destiny-enter-dream",
+      "title": "Love Tension Destiny Enter Dream",
+      "menu_order": 0,
+      "image_rel": "2026/08/Love-Tension-Destiny-Enter-Dream.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 5.61,
+          "y": 74.79,
+          "w": 19.03,
+          "h": 9.14,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 52.42,
+          "y": 63.09,
+          "w": 41.98,
+          "h": 31.64,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-strength-against-pressure",
+      "title": "Quiet Strength Against Pressure",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quiet-Strength-Against-Pressure.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 19.8,
+          "y": 76.07,
+          "w": 26.13,
+          "h": 10.06,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 71.04,
+          "y": 73.88,
+          "w": 21.81,
+          "h": 10.97,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-strength-explore",
+      "title": "Quiet Strength Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quiet-Strength-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.92,
+          "y": 31.81,
+          "w": 20.27,
+          "h": 8.96,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 61.68,
+          "y": 85.04,
+          "w": 26.85,
+          "h": 11.52,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-strength-gentle-power",
+      "title": "Quiet Strength Gentle Power",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quiet-Strength-Gentle-Power.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 4.48,
+          "y": 57.78,
+          "w": 18.42,
+          "h": 7.68,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 67.03,
+          "y": 83.02,
+          "w": 26.95,
+          "h": 11.89,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-strength-real-connection",
+      "title": "Quiet Strength Real Connection",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quiet-Strength-Real-Connection.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 5.61,
+          "y": 53.03,
+          "w": 19.55,
+          "h": 9.51,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 56.74,
+          "y": 77.72,
+          "w": 26.34,
+          "h": 9.88,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-strength-timeless-heart",
+      "title": "Quiet Strength Timeless Heart",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quiet-Strength-Timeless-Heart.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 8.49,
+          "y": 72.78,
+          "w": 25.31,
+          "h": 10.79,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 58.8,
+          "y": 79,
+          "w": 30.04,
+          "h": 10.97,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "quietest-wards-love-finds-way",
+      "title": "Quietest Wards Love Finds Way",
+      "menu_order": 0,
+      "image_rel": "2026/08/Quietest-Wards-Love-Finds-Way.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.03,
+          "y": 85.03,
+          "w": 17.7,
+          "h": 9.33,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 64.76,
+          "y": 87.23,
+          "w": 22.84,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "real-love-holds",
+      "title": "Real Love Holds",
+      "menu_order": 0,
+      "image_rel": "2026/08/Real-Love-Holds.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.2,
+          "y": 72.42,
+          "w": 20.37,
+          "h": 11.52,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.13,
+          "y": 72.42,
+          "w": 25.21,
+          "h": 11.52,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "real-love-protects-2",
+      "title": "Real Love Protects 2",
+      "menu_order": 0,
+      "image_rel": "2026/08/Real-Love-Protects-2.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.23,
+          "y": 77.54,
+          "w": 15.23,
+          "h": 9.51,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.5,
+          "y": 77.54,
+          "w": 21.3,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "real-love-protects",
+      "title": "Real Love Protects",
+      "menu_order": 0,
+      "image_rel": "2026/08/Real-Love-Protects.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.94,
+          "y": 78.54,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.19,
+          "y": 77.17,
+          "w": 21.91,
+          "h": 10.97,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "rescue-promise-love-stays",
+      "title": "Rescue Promise Love Stays",
+      "menu_order": 0,
+      "image_rel": "2026/08/Rescue-Promise-Love-Stays.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 5.3,
+          "y": 58.33,
+          "w": 24.07,
+          "h": 11.16,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 56.22,
+          "y": 60.53,
+          "w": 37.65,
+          "h": 34.2,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "reunions-enter-the-gate",
+      "title": "Reunions Enter The Gate",
+      "menu_order": 0,
+      "image_rel": "2026/08/Reunions-Enter-The-Gate.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 15.79,
+          "y": 70.22,
+          "w": 20.47,
+          "h": 11.34,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 59.62,
+          "y": 67.66,
+          "w": 20.47,
+          "h": 18.11,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-emotion-escape-enter-dream",
+      "title": "Romance Emotion Escape Enter Dream",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Emotion-Escape-Enter-Dream.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 27.95,
+          "y": 49.46,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "scov4cp",
+          "x": 70.94,
+          "y": 90.16,
+          "w": 22.84,
+          "h": 7.5,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-emotion-storytelling",
+      "title": "Romance Emotion Storytelling",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Emotion-Storytelling.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 22.27,
+          "y": 12.97,
+          "w": 12.14,
+          "h": 10.43,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 64.87,
+          "y": 13.71,
+          "w": 15.64,
+          "h": 8.96,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-fabric-2",
+      "title": "Romance Fabric 2",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Fabric-2.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.56,
+          "y": 75.98,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 63.85,
+          "y": 73.78,
+          "w": 16,
+          "h": 8,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-fabric-explore",
+      "title": "Romance Fabric Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Fabric-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 11.37,
+          "y": 49.55,
+          "w": 18.72,
+          "h": 9.51,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 73.51,
+          "y": 78.64,
+          "w": 21.81,
+          "h": 8.23,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-fabric",
+      "title": "Romance Fabric",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Fabric.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 2.73,
+          "y": 67.11,
+          "w": 17.9,
+          "h": 10.06,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.96,
+          "y": 70.95,
+          "w": 17.39,
+          "h": 10.79,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-in-bloom-explore",
+      "title": "Romance In Bloom Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-In-Bloom-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.2,
+          "y": 70.4,
+          "w": 21.81,
+          "h": 9.33,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.5,
+          "y": 85.59,
+          "w": 25.21,
+          "h": 9.69,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-mood-memories-explore",
+      "title": "Romance Mood Memories Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Mood-Memories-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 10.44,
+          "y": 78.09,
+          "w": 21.09,
+          "h": 8.41,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 61.99,
+          "y": 79.55,
+          "w": 24.07,
+          "h": 9.88,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-rebirth-protection-explore",
+      "title": "Romance Rebirth Protection Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-Rebirth-Protection-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 13.53,
+          "y": 79.55,
+          "w": 22.33,
+          "h": 8.6,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 61.16,
+          "y": 80.28,
+          "w": 26.13,
+          "h": 10.79,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "romance-that-heals-explore",
+      "title": "Romance That Heals Explore",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romance-That-Heals-Explore.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 15.17,
+          "y": 82.48,
+          "w": 24.18,
+          "h": 9.51,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62,
+          "y": 80,
+          "w": 16,
+          "h": 8,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        },
+        {
+          "id": "siijn6e",
+          "x": 56.64,
+          "y": 85.77,
+          "w": 31.07,
+          "h": 10.43,
+          "href": "",
+          "label": "Hotspot",
+          "role": "custom"
+        }
+      ]
+    },
+    {
+      "slug": "romantic-sunset-balcony-embrace",
+      "title": "Romantic Sunset Balcony Embrace",
+      "menu_order": 0,
+      "image_rel": "2026/08/Romantic-Sunset-Balcony-Embrace.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 10.03,
+          "y": 36.02,
+          "w": 25.31,
+          "h": 63.1,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 68.06,
+          "y": 28.7,
+          "w": 28.19,
+          "h": 64.2,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "safe-together-finally",
+      "title": "Safe Together Finally",
+      "menu_order": 0,
+      "image_rel": "2026/08/Safe-Together-Finally.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 4.06,
+          "y": 73.15,
+          "w": 15.95,
+          "h": 7.5,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 70.11,
+          "y": 83.57,
+          "w": 21.91,
+          "h": 8.6,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "sanctuary-heart-stories-that-stay",
+      "title": "Sanctuary Heart Stories That Stay",
+      "menu_order": 0,
+      "image_rel": "2026/08/Sanctuary-Heart-Stories-That-Stay.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 15.79,
+          "y": 84.49,
+          "w": 20.47,
+          "h": 9.14,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.91,
+          "y": 90.89,
+          "w": 24.18,
+          "h": 7.86,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "sincere-resilient-together",
+      "title": "Sincere Resilient Together",
+      "menu_order": 0,
+      "image_rel": "2026/08/Sincere-Resilient-Together.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 6.02,
+          "y": 78.64,
+          "w": 18.21,
+          "h": 10.06,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 62.09,
+          "y": 86.87,
+          "w": 20.99,
+          "h": 10.24,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "sisters-real-love",
+      "title": "Sisters Real Love",
+      "menu_order": 0,
+      "image_rel": "2026/08/Sisters-Real-Love.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 3.15,
+          "y": 50,
+          "w": 16,
+          "h": 8,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 71.55,
+          "y": 79.92,
+          "w": 21.91,
+          "h": 13.35,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "some-goodbyes-become-forever",
+      "title": "Some Goodbyes Become Forever",
+      "menu_order": 0,
+      "image_rel": "2026/08/Some-Goodbyes-Become-Forever.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.95,
+          "y": 82.29,
+          "w": 17.08,
+          "h": 10.06,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.75,
+          "y": 86.5,
+          "w": 20.99,
+          "h": 10.06,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        },
+        {
+          "id": "sov2cbu",
+          "x": 71.86,
+          "y": 87.78,
+          "w": 1.85,
+          "h": 5.3,
+          "href": "",
+          "label": "Hotspot",
+          "role": "custom"
+        }
+      ]
+    },
+    {
+      "slug": "strength-grace-together",
+      "title": "Strength Grace Together",
+      "menu_order": 0,
+      "image_rel": "2026/08/Strength-Grace-Together.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 5.5,
+          "y": 68.03,
+          "w": 25,
+          "h": 12.25,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.04,
+          "y": 84.67,
+          "w": 22.94,
+          "h": 11.16,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "supernatural-guardian",
+      "title": "Supernatural Guardian",
+      "menu_order": 0,
+      "image_rel": "2026/08/Supernatural-Guardian.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.41,
+          "y": 79.18,
+          "w": 16.46,
+          "h": 11.89,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 60.03,
+          "y": 80.83,
+          "w": 29.42,
+          "h": 11.71,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "tender-hearts-stronger-together",
+      "title": "Tender Hearts Stronger Together",
+      "menu_order": 0,
+      "image_rel": "2026/08/Tender-Hearts-Stronger-Together.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 17.64,
+          "y": 76.62,
+          "w": 16.67,
+          "h": 10.79,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 53.96,
+          "y": 62.91,
+          "w": 38.37,
+          "h": 29.45,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "together-facing-family-pressure",
+      "title": "Together Facing Family Pressure",
+      "menu_order": 0,
+      "image_rel": "2026/08/Together-Facing-Family-Pressure.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 10.75,
+          "y": 79.73,
+          "w": 16.05,
+          "h": 8.96,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 55.92,
+          "y": 63.64,
+          "w": 40.43,
+          "h": 31.64,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    },
+    {
+      "slug": "where-care-feels-like-home",
+      "title": "Where Care Feels Like Home",
+      "menu_order": 0,
+      "image_rel": "2026/08/Where-Care-Feels-Like-Home.jpg",
+      "has_baked_menu": false,
+      "hotspots": [
+        {
+          "id": "soft",
+          "x": 16.1,
+          "y": 81.93,
+          "w": 19.75,
+          "h": 8.23,
+          "href": "/soft/",
+          "label": "Enter Soft",
+          "role": "soft"
+        },
+        {
+          "id": "mirror",
+          "x": 72.27,
+          "y": 83.76,
+          "w": 19.96,
+          "h": 8.96,
+          "href": "/mirror/",
+          "label": "Enter Mirror",
+          "role": "mirror"
+        }
+      ]
+    }
+  ],
+  "quotes": [],
+  "media": [
+    {
+      "rel": "2026/08/After-Conflict-Emotional-Healing.jpg",
+      "bytes": 799398,
+      "mtime": 1788103867
+    },
+    {
+      "rel": "2026/08/After-The-Rescue-Hope-Begins.jpg",
+      "bytes": 758548,
+      "mtime": 1788103868
+    },
+    {
+      "rel": "2026/08/Airport-Flight.jpg",
+      "bytes": 559839,
+      "mtime": 1788103868
+    },
+    {
+      "rel": "2026/08/Bonds-Cannot-Be-Taken.jpg",
+      "bytes": 743466,
+      "mtime": 1788103869
+    },
+    {
+      "rel": "2026/08/Calm-Hearts-Explore.jpg",
+      "bytes": 791326,
+      "mtime": 1788103870
+    },
+    {
+      "rel": "2026/08/Facing-Pressure-Choosing-Love.jpg",
+      "bytes": 849243,
+      "mtime": 1788103870
+    },
+    {
+      "rel": "2026/08/Family-Pressure-Choose-Hope.jpg",
+      "bytes": 802479,
+      "mtime": 1788103871
+    },
+    {
+      "rel": "2026/08/Fathers-Test-Strength-Love.jpg",
+      "bytes": 870620,
+      "mtime": 1788103871
+    },
+    {
+      "rel": "2026/08/Heroes-Love-Finds-Them.jpg",
+      "bytes": 792969,
+      "mtime": 1788103872
+    },
+    {
+      "rel": "2026/08/Hope-Healing-Love.jpg",
+      "bytes": 787413,
+      "mtime": 1788103873
+    },
+    {
+      "rel": "2026/08/Hospital-Romance-Enter-The-Ward.jpg",
+      "bytes": 761534,
+      "mtime": 1788103873
+    },
+    {
+      "rel": "2026/08/Light-And-Dark-And.jpg",
+      "bytes": 612313,
+      "mtime": 1788103874
+    },
+    {
+      "rel": "2026/08/Love-After-The-Storm.jpg",
+      "bytes": 733546,
+      "mtime": 1788103875
+    },
+    {
+      "rel": "2026/08/Love-Destiny-Beyond-Realms.jpg",
+      "bytes": 873818,
+      "mtime": 1788103875
+    },
+    {
+      "rel": "2026/08/Love-Gentle-Breeze-Explore.jpg",
+      "bytes": 692102,
+      "mtime": 1788103876
+    },
+    {
+      "rel": "2026/08/Love-Gentle-Breeze.jpg",
+      "bytes": 721197,
+      "mtime": 1788103877
+    },
+    {
+      "rel": "2026/08/Love-Grace-Strength.jpg",
+      "bytes": 816524,
+      "mtime": 1788103877
+    },
+    {
+      "rel": "2026/08/Love-Heals-Strength-Stays.jpg",
+      "bytes": 754886,
+      "mtime": 1788103878
+    },
+    {
+      "rel": "2026/08/Love-Stays.jpg",
+      "bytes": 780835,
+      "mtime": 1788103878
+    },
+    {
+      "rel": "2026/08/Love-Stories-Destruction-Choice.jpg",
+      "bytes": 770508,
+      "mtime": 1788103879
+    },
+    {
+      "rel": "2026/08/Love-Tension-Destiny-Enter-Dream.jpg",
+      "bytes": 777577,
+      "mtime": 1788103880
+    },
+    {
+      "rel": "2026/08/Quiet-Strength-Against-Pressure.jpg",
+      "bytes": 836785,
+      "mtime": 1788103880
+    },
+    {
+      "rel": "2026/08/Quiet-Strength-Explore.jpg",
+      "bytes": 1004360,
+      "mtime": 1788103881
+    },
+    {
+      "rel": "2026/08/Quiet-Strength-Gentle-Power.jpg",
+      "bytes": 791326,
+      "mtime": 1788103882
+    },
+    {
+      "rel": "2026/08/Quiet-Strength-Real-Connection.jpg",
+      "bytes": 867586,
+      "mtime": 1788103882
+    },
+    {
+      "rel": "2026/08/Quiet-Strength-Timeless-Heart.jpg",
+      "bytes": 875705,
+      "mtime": 1788103883
+    },
+    {
+      "rel": "2026/08/Quietest-Wards-Love-Finds-Way.jpg",
+      "bytes": 627461,
+      "mtime": 1788103884
+    },
+    {
+      "rel": "2026/08/Real-Love-Holds.jpg",
+      "bytes": 750652,
+      "mtime": 1788103884
+    },
+    {
+      "rel": "2026/08/Real-Love-Protects-2.jpg",
+      "bytes": 672875,
+      "mtime": 1788103885
+    },
+    {
+      "rel": "2026/08/Real-Love-Protects.jpg",
+      "bytes": 672875,
+      "mtime": 1788103885
+    },
+    {
+      "rel": "2026/08/Rescue-Promise-Love-Stays.jpg",
+      "bytes": 676333,
+      "mtime": 1788103886
+    },
+    {
+      "rel": "2026/08/Reunions-Enter-The-Gate.jpg",
+      "bytes": 712947,
+      "mtime": 1788103887
+    },
+    {
+      "rel": "2026/08/Romance-Emotion-Escape-Enter-Dream.jpg",
+      "bytes": 622393,
+      "mtime": 1788103887
+    },
+    {
+      "rel": "2026/08/Romance-Emotion-Storytelling.jpg",
+      "bytes": 554170,
+      "mtime": 1788103888
+    },
+    {
+      "rel": "2026/08/Romance-Fabric-2.jpg",
+      "bytes": 741906,
+      "mtime": 1788103889
+    },
+    {
+      "rel": "2026/08/Romance-Fabric-Explore.jpg",
+      "bytes": 651053,
+      "mtime": 1788103889
+    },
+    {
+      "rel": "2026/08/Romance-Fabric.jpg",
+      "bytes": 810988,
+      "mtime": 1788103890
+    },
+    {
+      "rel": "2026/08/Romance-In-Bloom-Explore.jpg",
+      "bytes": 720535,
+      "mtime": 1788103890
+    },
+    {
+      "rel": "2026/08/Romance-Mood-Memories-Explore.jpg",
+      "bytes": 658069,
+      "mtime": 1788103891
+    },
+    {
+      "rel": "2026/08/Romance-Rebirth-Protection-Explore.jpg",
+      "bytes": 877642,
+      "mtime": 1788103892
+    },
+    {
+      "rel": "2026/08/Romance-That-Heals-Explore.jpg",
+      "bytes": 897909,
+      "mtime": 1788103892
+    },
+    {
+      "rel": "2026/08/Romantic-Sunset-Balcony-Embrace.jpg",
+      "bytes": 685974,
+      "mtime": 1788103893
+    },
+    {
+      "rel": "2026/08/Safe-Together-Finally.jpg",
+      "bytes": 622920,
+      "mtime": 1788103894
+    },
+    {
+      "rel": "2026/08/Sanctuary-Heart-Stories-That-Stay.jpg",
+      "bytes": 731534,
+      "mtime": 1788103894
+    },
+    {
+      "rel": "2026/08/Sincere-Resilient-Together.jpg",
+      "bytes": 695486,
+      "mtime": 1788103895
+    },
+    {
+      "rel": "2026/08/Sisters-Real-Love.jpg",
+      "bytes": 796732,
+      "mtime": 1788103896
+    },
+    {
+      "rel": "2026/08/Some-Goodbyes-Become-Forever.jpg",
+      "bytes": 630585,
+      "mtime": 1788103896
+    },
+    {
+      "rel": "2026/08/Strength-Grace-Together.jpg",
+      "bytes": 811005,
+      "mtime": 1788103897
+    },
+    {
+      "rel": "2026/08/Supernatural-Guardian.jpg",
+      "bytes": 833778,
+      "mtime": 1788103897
+    },
+    {
+      "rel": "2026/08/Tender-Hearts-Stronger-Together.jpg",
+      "bytes": 812411,
+      "mtime": 1788103898
+    },
+    {
+      "rel": "2026/08/Together-Facing-Family-Pressure.jpg",
+      "bytes": 822004,
+      "mtime": 1788103899
+    },
+    {
+      "rel": "2026/08/Where-Care-Feels-Like-Home.jpg",
+      "bytes": 566191,
+      "mtime": 1788103899
+    }
+  ],
+  "rotation": {
+    "interval": "hourly",
+    "current_hero_slug": "after-conflict-emotional-healing",
+    "force_hero_slug": ""
+  },
+  "product_cats": [],
+  "product_tags": [],
+  "blog_cats": [],
+  "products_excluded": true,
+  "heroes_only": true
+}

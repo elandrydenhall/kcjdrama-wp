@@ -384,6 +384,50 @@ def apply_only_main() -> int:
     return 0
 
 
+def export_heroes_only_pack() -> Path:
+    """Full local export, then keep only heroes + media + rotation for a clean-slate ship."""
+    import json
+
+    full = export_local_pack()
+    data = json.loads(full.read_text(encoding="utf-8"))
+    heroes = data.get("heroes") or []
+    media = data.get("media") or []
+    rotation = data.get("rotation") or {}
+    slim = {
+        "shipped_at": data.get("shipped_at"),
+        "theme_version": data.get("theme_version"),
+        "pages": [],
+        "heroes": heroes,
+        "quotes": [],
+        "media": media,
+        "rotation": rotation,
+        "product_cats": [],
+        "product_tags": [],
+        "blog_cats": [],
+        "products_excluded": True,
+        "heroes_only": True,
+    }
+    out = LOCAL_WP / "scripts" / "_hostinger-heroes-only.json"
+    out.write_text(json.dumps(slim, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Heroes-only pack: {len(heroes)} heroes, {len(media)} media → {out}")
+    return out
+
+
+def apply_heroes_main() -> int:
+    """Upload hero plates + hotspot meta + rotation. Does not touch theme, pages, quotes, products."""
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    pack = export_heroes_only_pack()
+    print(f"Connecting {USER}@{HOST}:{PORT} …")
+    client = ssh_connect()
+    theme_remote = find_theme_dir(client, verbose=False)
+    wp_root = wp_root_from_theme(theme_remote)
+    print("WP root:", wp_root)
+    apply_remote_content(client, wp_root, stamp, pack)
+    client.close()
+    print("Heroes-only ship complete. Check https://kcjdrama.com/ (purge LiteSpeed if stale).")
+    return 0
+
+
 def ship_main() -> int:
     """Theme + pages + heroes + quotes + merch tags/cats. Never ships products."""
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -488,4 +532,6 @@ if __name__ == "__main__":
         raise SystemExit(ship_main())
     if "--apply-only" in sys.argv:
         raise SystemExit(apply_only_main())
+    if "--apply-heroes" in sys.argv:
+        raise SystemExit(apply_heroes_main())
     raise SystemExit(main())
